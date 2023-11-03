@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">SysCourier</string>
+    <string name="abrir_nav">Abrir navegador</string>
+    <string name="cerrar_nav">Cerrar navegador</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="opciones_array">
+        <item>Selecciona la razon de la devolucion</item>
+        <item>No existe la direccion</item>
+        <item>Cambio de domicilio</item>
+        <item>Destinatario desconocido</item>
+        <item>Rehusado- Se nego a recibir</item>
+        <item>Direccion Incompleta</item>
+        <item>Destinataroi ausente</item>
+    </string-array>
+
+</resources>

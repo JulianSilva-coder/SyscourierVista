@@ -1,10 +1,15 @@
 package com.example.syscourier
 
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 
 interface ApiService {
-    @GET("guiaintro/{id}")
-    fun obtenerDatos(@Path("id") id: Int): Call<GuiaIntro> // ObjetoResultado es la clase que defines para representar la respuesta del servicio
+    @FormUrlEncoded
+    @POST("loginMensajero")
+    fun obtenerDatos(
+        @Field("correo") correo: String,
+        @Field("password") contrasena: String
+    ): Call<GuiaIntro>
 }

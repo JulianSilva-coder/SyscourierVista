@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".Transito">
+
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="66dp"
+    android:background="@color/red"
+    android:text="Informacion de envio"
+    android:textAlignment="center"
+    android:textColor="@color/white"
+    android:textSize="30sp"
+    android:textStyle="bold"
+    />
+
+
+</RelativeLayout>

@@ -38,6 +38,9 @@
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
+        <activity android:name=".AsignacionesActivity">
+            <!-- Puedes agregar otras configuraciones de actividad aquí si es necesario -->
+        </activity>
     </application>
 
 </manifest>

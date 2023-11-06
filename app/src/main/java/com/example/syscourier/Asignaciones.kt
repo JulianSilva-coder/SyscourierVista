@@ -8,10 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.syscourier.databinding.FragmentAsignacionesBinding
 import com.google.zxing.integration.android.IntentIntegrator
 
-data class MyObject(val name: String, val description: String)
+data class MyObject(val name: String, val description: String, val id: Int)
 
 class Asignaciones : Fragment() {
 
@@ -26,23 +27,25 @@ class Asignaciones : Fragment() {
 
         // Crear una lista de objetos de ejemplo
         val data = listOf(
-            MyObject("Objeto 1", "Descripción del objeto 1"),
-            MyObject("Objeto 2", "Descripción del objeto 2"),
-            MyObject("Objeto 3", "Descripción del objeto 3")
+            MyObject("Objeto 1", "Descripción del objeto 1", 1234567),
+            MyObject("Objeto 2", "Descripción del objeto 2", 987654),
+            MyObject("Objeto 3", "Descripción del objeto 3", 1234556),
+            MyObject("Objeto 3", "Descripción del objeto 3", 1234556),
+            MyObject("Objeto 3", "Descripción del objeto 3", 1234556),
+            MyObject("Objeto 3", "Descripción del objeto 3", 1234556),
+            MyObject("Objeto 3", "Descripción del objeto 3", 1234556),
+            MyObject("Objeto 3", "Descripción del objeto 3", 1234556),
+            MyObject("Objeto 3", "Descripción del objeto 3", 1234556),
+            MyObject("Objeto 3", "Descripción del objeto 3", 1234556),
+            MyObject("Objeto 3", "Descripción del objeto 3", 1234556),
+            MyObject("Objeto 3", "Descripción del objeto 3", 1234556)
         )
 
-        // Inflar vistas para cada elemento de la lista de objetos
-        for (item in data) {
-            val itemView = inflater.inflate(R.layout.item_layout, container, false)
-
-            val nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
-            val descriptionTextView = itemView.findViewById<TextView>(R.id.descriptionTextView)
-
-            nameTextView.text = item.name
-            descriptionTextView.text = item.description
-
-            binding.asignacionesLayout.addView(itemView)
-        }
+        // Configurar el RecyclerView
+        val recyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(requireContext()) // Asegura la dirección vertical
+        val adapter = MyAdapter(data)
+        recyclerView.adapter = adapter
 
         return binding.root
     }

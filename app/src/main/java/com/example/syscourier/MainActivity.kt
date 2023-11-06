@@ -35,7 +35,8 @@ class MainActivity : Activity(){
                 override fun onResponse(call: Call<GuiaIntro>, response: Response<GuiaIntro>) {
                     if(response.isSuccessful){
                         val token = response.body()
-                        val intent = Intent(this@MainActivity, Asignaciones::class.java)
+                        Log.d("Token", token.toString())
+                        val intent = Intent(this@MainActivity, AsignacionesActivity::class.java)
                         startActivity(intent)
                     }else{
                         Toast.makeText(this@MainActivity, "Error de inicio de sesión, credenciales inválidas", Toast.LENGTH_SHORT).show()

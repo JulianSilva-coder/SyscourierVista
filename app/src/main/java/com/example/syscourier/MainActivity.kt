@@ -36,7 +36,7 @@ class MainActivity : Activity(){
                     if(response.isSuccessful){
                         val token = response.body()
                         Log.d("Token", token.toString())
-                        val intent = Intent(this@MainActivity, AsignacionesActivity::class.java)
+                        val intent = Intent(this@MainActivity, Menudesplegable::class.java)
                         startActivity(intent)
                     }else{
                         Toast.makeText(this@MainActivity, "Error de inicio de sesión, credenciales inválidas", Toast.LENGTH_SHORT).show()

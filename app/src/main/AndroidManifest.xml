@@ -39,8 +39,13 @@
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
         <activity android:name=".AsignacionesActivity">
-            <!-- Puedes agregar otras configuraciones de actividad aquí si es necesario -->
         </activity>
+        <activity android:name=".Devoluciones_info_activity">
+        </activity>
+        <activity android:name=".entregados_infoActivity">
+        </activity>
+        <activity android:name=".Transito_info" />
+        <activity android:name=".Entregados_info" />
     </application>
 
 </manifest>

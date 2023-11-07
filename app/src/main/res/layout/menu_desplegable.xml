@@ -25,13 +25,14 @@
 
             <ImageButton
                 android:id="@+id/imageButton"
-                android:layout_width="42dp"
-                android:layout_height="40dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_marginStart="17dp"
                 android:layout_marginTop="15dp"
                 android:background="@color/white"
                 android:layout_gravity="start"
                 android:src="@drawable/menu_option" />
+
 
             <TextView
                 android:id="@+id/textView7"

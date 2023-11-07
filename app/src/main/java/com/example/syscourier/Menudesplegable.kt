@@ -1,6 +1,7 @@
 package com.example.syscourier
 
-import Devoluciones
+import Devoluciones_info
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
@@ -46,12 +47,17 @@ class Menudesplegable : AppCompatActivity(), NavigationView.OnNavigationItemSele
             R.id.nav_asignaciones -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, Asignaciones()).commit()
             R.id.nav_transito -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, Transito()).commit()
+                .replace(R.id.fragment_container, Transito_info()).commit()
             R.id.nav_entregados -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, Entregados()).commit()
             R.id.nav_devoluciones -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, Devoluciones()).commit()
-            R.id.nav_logout -> Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()
+            R.id.nav_logout -> {
+                Toast.makeText(this, "Logout!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true

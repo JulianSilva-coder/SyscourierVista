@@ -1,5 +1,6 @@
 package com.example.syscourier
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,9 +8,9 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import android.content.Context
 
-class MyAdapter(private val data: List<MyObject>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
-
+class Adapterentregados(private val data: List<MyObject>, private val context: Context) : RecyclerView.Adapter<Adapterentregados.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
@@ -27,11 +28,10 @@ class MyAdapter(private val data: List<MyObject>) : RecyclerView.Adapter<MyAdapt
         holder.descriptionTextView.text = item.description
 
         holder.actionButton.setOnClickListener {
-            // Aquí puedes definir la lógica que deseas ejecutar cuando se presiona el botón
-            Toast.makeText(holder.itemView.context, "Botón presionado en posición: $position", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, entregados_infoActivity::class.java) // Reemplaza Transito_info con el nombre de tu nueva actividad
+            context.startActivity(intent)
         }
     }
-
     override fun getItemCount(): Int {
         return data.size
     }

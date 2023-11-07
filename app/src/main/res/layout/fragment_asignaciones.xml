@@ -1,8 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/asignacionesLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"> <!-- Cambiar a match_parent para que ocupe toda la pantalla -->
-
+    android:layout_height="match_parent">
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="match_parent"
@@ -33,7 +32,8 @@
             android:layout_gravity="center_horizontal|bottom"
             android:layout_margin="16dp"
             android:src="@drawable/vector"
-            android:backgroundTint="@color/red"/>
+            android:contentDescription="Button for scanning camera"
+            android:backgroundTint="@color/red" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

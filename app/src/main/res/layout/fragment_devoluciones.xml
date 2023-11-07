@@ -1,85 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/devoluciones"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Devoluciones">
-
+    android:layout_height="match_parent">
     <TextView
-        android:id="@+id/textView5"
-        android:layout_width="277dp"
-        android:layout_height="55dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="86dp"
-        android:layout_marginEnd="67dp"
-        android:gravity="center"
-        android:text="Motivo de devolución"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-
-    <TextView
+        android:id="@+id/titleTextView"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
+        android:layout_height="wrap_content"
         android:background="@color/red"
-        android:text="Devolución"
+        android:text="Devoluciones"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/edit_text_area"
-        android:layout_width="wrap_content"
-        android:layout_height="172dp"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="14dp"
-        android:background="@android:drawable/editbox_background"
-        android:gravity="top|start"
-        android:inputType="textMultiLine"
-        android:lines="8"
-        android:maxLines="10"
-        android:minLines="6"
-        android:padding="10dp"
-        android:scrollbars="vertical" />
-
-
-    <Spinner
-        android:id="@+id/spinner"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/edit_text_area"
-        android:layout_marginTop="16dp"
-        android:entries="@array/opciones_array" />
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titleTextView">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="685dp"
+            android:layout_marginBottom="56dp"
+            android:background="@android:color/transparent" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="410dp"
-        android:layout_height="106dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="2dp"
-        android:background="@color/red"
-        android:text="Continuar"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30sp" />
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="65dp"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView6"
-        android:layout_alignTop="@+id/textView6"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="173dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="172dp"
-        android:src="@android:drawable/ic_media_play" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/camara_escaner"
+            android:layout_width="55dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/vector"
+            android:contentDescription="Button for scanning camera"
+            android:backgroundTint="@color/red" />
 
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

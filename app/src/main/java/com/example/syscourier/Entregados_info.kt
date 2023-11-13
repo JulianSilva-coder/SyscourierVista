@@ -6,6 +6,7 @@ import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -71,10 +72,21 @@ class Entregados_info : Fragment() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
             stream.flush()
             stream.close()
+
+            // Agregar la imagen a la galería
+            addToGallery(file)
+
             Log.d("ImageSaved", "Image saved successfully: ${file.absolutePath}")
         } catch (e: IOException) {
             e.printStackTrace()
             Log.e("ImageSaveError", "Error saving image: ${e.message}")
         }
+    }
+
+    private fun addToGallery(file: File) {
+        val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+        val contentUri = Uri.fromFile(file)
+        mediaScanIntent.data = contentUri
+        requireContext().sendBroadcast(mediaScanIntent)
     }
 }

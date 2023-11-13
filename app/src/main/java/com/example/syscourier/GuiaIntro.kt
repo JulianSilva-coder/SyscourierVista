@@ -1,6 +1,7 @@
 package com.example.syscourier
 
 class GuiaIntro(
-    val correo: String,
-    val password: String
+    val id: Int,
+    val remitenteNombre: String,
+    val destinatarioDireccion: String
 )

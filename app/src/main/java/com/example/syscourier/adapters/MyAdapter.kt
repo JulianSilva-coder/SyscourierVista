@@ -1,4 +1,4 @@
-package com.example.syscourier
+package com.example.syscourier.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.syscourier.R
+import com.example.syscourier.classLayout.MyObject
 
 class MyAdapter(private val data: List<MyObject>) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 

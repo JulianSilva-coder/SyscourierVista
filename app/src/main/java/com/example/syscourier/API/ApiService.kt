@@ -1,5 +1,6 @@
-package com.example.syscourier
+package com.example.syscourier.API
 
+import com.example.syscourier.TokenDTO
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -11,5 +12,5 @@ interface ApiService {
     fun obtenerDatos(
         @Field("correo") correo: String,
         @Field("password") contrasena: String
-    ): Call<GuiaIntro>
+    ): Call<TokenDTO>
 }

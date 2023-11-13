@@ -1,3 +1,5 @@
+package com.example.syscourier.adapters
+
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.syscourier.Devoluciones_info_activity
-import com.example.syscourier.MydevolucionesObject
+import com.example.syscourier.activitys.Devoluciones_info_activity
+import com.example.syscourier.classLayout.MydevolucionesObject
 import com.example.syscourier.R
 
 class AdapterDevoluciones(private val data: List<MydevolucionesObject>, private val context: Context) : RecyclerView.Adapter<AdapterDevoluciones.ViewHolder>() {

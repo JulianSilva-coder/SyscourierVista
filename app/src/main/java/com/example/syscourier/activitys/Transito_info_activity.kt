@@ -1,17 +1,19 @@
-package com.example.syscourier
+package com.example.syscourier.activitys
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.syscourier.R
+import com.example.syscourier.Transito_info
 
-class Entregados_activity : AppCompatActivity()  {
+class Transito_info_activity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_entregados)
+        setContentView(R.layout.activity_transito)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.entregados, Entregados())
+        fragmentTransaction.replace(R.id.TransitoLayout, Transito_info())
         fragmentTransaction.commit()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.entregados, Entregados())
+            .replace(R.id.TransitoLayout, Transito_info())
             .commit()
     }
 }

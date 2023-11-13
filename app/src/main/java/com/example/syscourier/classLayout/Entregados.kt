@@ -1,12 +1,12 @@
-package com.example.syscourier
+package com.example.syscourier.classLayout
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.syscourier.adapters.Adapterentregados
 import com.example.syscourier.databinding.FragmentTransitoBinding
 
 data class MyentregadoObject(val name: String, val description: String, val id: Int)

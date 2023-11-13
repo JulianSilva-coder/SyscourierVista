@@ -1,6 +1,6 @@
-package com.example.syscourier
+package com.example.syscourier.classLayout
 
-import AdapterDevoluciones
+import com.example.syscourier.adapters.AdapterDevoluciones
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,7 +37,7 @@ class Devoluciones : Fragment() {
 
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = AdapterDevoluciones(data, requireContext()) // Asegúrate de tener la clase AdapterDevoluciones definida y pasando el contexto adecuadamente
+        val adapter = AdapterDevoluciones(data, requireContext()) // Asegúrate de tener la clase com.example.syscourier.adapters.AdapterDevoluciones definida y pasando el contexto adecuadamente
         recyclerView.adapter = adapter
 
         return binding.root

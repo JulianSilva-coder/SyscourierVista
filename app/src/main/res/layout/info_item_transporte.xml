@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/info_item_transporte"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Entregados_info">
+
+    <TextView
+        android:id="@+id/entrega_layout"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@color/red"
+        android:text="Información"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/idTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/entrega_layout"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="2dp"
+        android:text="ID"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/idValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/idTextView"
+        android:layout_marginStart="307dp"
+        android:layout_toEndOf="@id/idTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/productoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="12dp"
+        android:text="Producto"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/productoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/productoTextView"
+        android:layout_marginStart="247dp"
+        android:layout_toEndOf="@id/productoTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/dividerRemitente"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/remitenteTextView"
+        android:layout_marginBottom="-6dp"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/remitenteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/productoTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="11dp"
+        android:text="Remitente"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <View
+        android:id="@+id/divider1Remitente"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/identificacionRemitenteTextView"
+        android:layout_marginBottom="-6dp"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/identificacionRemitenteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/remitenteTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="15dp"
+        android:text="Identificacion"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/remitenteInfoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/identificacionRemitenteTextView"
+        android:layout_marginStart="212dp"
+        android:layout_toEndOf="@id/identificacionRemitenteTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/nombreRemitenteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/identificacionRemitenteTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:text="Nombre"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/nombreRemitenteInfoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/nombreRemitenteTextView"
+        android:layout_marginStart="256dp"
+        android:layout_toEndOf="@id/nombreRemitenteTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/direccionRemitenteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nombreRemitenteTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="Direccion"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/direccionRemitenteInfoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/direccionRemitenteTextView"
+        android:layout_marginStart="245dp"
+        android:layout_toEndOf="@id/direccionRemitenteTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/telefonoRemitenteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/direccionRemitenteTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="13dp"
+        android:text="Telefono"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/telefonoRemitenteInfoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/telefonoRemitenteTextView"
+        android:layout_marginStart="253dp"
+        android:layout_toEndOf="@id/telefonoRemitenteTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/dividerDestinatario"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/destinatarioTextView"
+        android:layout_marginBottom="-6dp"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/destinatarioTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/telefonoRemitenteTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="153dp"
+        android:layout_marginTop="7dp"
+        android:text="Destinatario"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/divider2Remitente"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/identificacionDestinatarioTextView"
+        android:layout_marginBottom="-6dp"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/identificacionDestinatarioTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/destinatarioTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="2dp"
+        android:text="Identificacion"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/identificacionDestinatarioInfoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/identificacionDestinatarioTextView"
+        android:layout_marginStart="211dp"
+        android:layout_toEndOf="@id/identificacionDestinatarioTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/nombreDestinatarioTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre"
+        android:textSize="20sp"
+        android:layout_below="@id/identificacionDestinatarioTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/nombreDestinatarioInfoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/nombreDestinatarioTextView"
+        android:layout_marginStart="257dp"
+        android:layout_toEndOf="@id/nombreDestinatarioTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/direccionDestinatarioTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Direccion"
+        android:textSize="20sp"
+        android:layout_below="@id/nombreDestinatarioTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/direccionDestinatarioInfoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/direccionDestinatarioTextView"
+        android:layout_marginStart="245dp"
+        android:layout_toEndOf="@id/direccionDestinatarioTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/telefonoDestinatarioTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Telefono"
+        android:textSize="20sp"
+        android:layout_below="@id/direccionDestinatarioTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"/>
+
+
+    <TextView
+        android:id="@+id/telefonoDestinatarioInfoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/telefonoDestinatarioTextView"
+        android:layout_marginStart="253dp"
+        android:layout_toEndOf="@id/telefonoDestinatarioTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <View
+        android:id="@+id/dividerTotal"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/totalTextView"
+        android:layout_marginBottom="-3dp"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/totalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/telefonoDestinatarioTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="185dp"
+        android:layout_marginTop="4dp"
+        android:text="Total"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/totalFieteTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/totalTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="2dp"
+        android:text="Total Fiete"
+        android:textSize="20sp" />
+    <View
+        android:id="@+id/divider3Remitente"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/totalFieteTextView"
+        android:layout_marginBottom="-6dp"
+        android:background="@android:color/darker_gray" />
+
+
+    <TextView
+        android:id="@+id/totalInfoValueTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/totalFieteTextView"
+        android:layout_marginStart="236dp"
+        android:layout_toEndOf="@id/totalFieteTextView"
+        android:text=".."
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="207dp"
+        android:layout_height="73dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+
+        android:layout_marginEnd="204dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/red"
+        android:gravity="center"
+        android:text="Entregar"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="207dp"
+
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/red"
+        android:gravity="center"
+        android:text="Devolución"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/boton_entregar"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="278dp"
+        android:layout_marginBottom="1dp"
+        android:src="@drawable/entregados_navbar" />
+
+    <ImageView
+        android:id="@+id/boton_devolucion"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="276dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/devoluciones_navbar" />
+</RelativeLayout>

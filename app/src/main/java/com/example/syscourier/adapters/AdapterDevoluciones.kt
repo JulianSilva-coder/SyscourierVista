@@ -28,7 +28,7 @@ class AdapterDevoluciones(private val data: List<MydevolucionesObject>, private 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_layout_devoluciones, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
         return ViewHolder(itemView)
     }
 

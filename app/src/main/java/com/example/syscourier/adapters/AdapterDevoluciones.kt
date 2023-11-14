@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.syscourier.activitys.Devoluciones_info_activity
-import com.example.syscourier.classLayout.MydevolucionesObject
+import com.example.syscourier.activities.Devoluciones_info_activity
+import com.example.syscourier.fragments.MydevolucionesObject
 import com.example.syscourier.R
 
 class AdapterDevoluciones(private val data: List<MydevolucionesObject>, private val context: Context) : RecyclerView.Adapter<AdapterDevoluciones.ViewHolder>() {
@@ -28,7 +28,7 @@ class AdapterDevoluciones(private val data: List<MydevolucionesObject>, private 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.guia_intro_item_layout, parent, false)
         return ViewHolder(itemView)
     }
 

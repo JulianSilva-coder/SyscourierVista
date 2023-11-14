@@ -1,6 +1,6 @@
 package com.example.syscourier.API
 
-import com.example.syscourier.TokenDTO
+import com.example.syscourier.dto.TokenDTO
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

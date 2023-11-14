@@ -9,11 +9,11 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.syscourier.activitys.Entregados_infoActivity
-import com.example.syscourier.GuiaIntro
+import com.example.syscourier.activities.Entregados_infoActivity
+import com.example.syscourier.dto.GuiaIntroDTO
 import com.example.syscourier.R
 
-class Adapterentregados(private val data: List<GuiaIntro>, private val entregadosInfoActivity: Context) :
+class Adapterentregados(private val data: List<GuiaIntroDTO>, private val entregadosInfoActivity: Context) :
     RecyclerView.Adapter<Adapterentregados.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,7 +33,7 @@ class Adapterentregados(private val data: List<GuiaIntro>, private val entregado
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.guia_intro_item_layout, parent, false)
         return ViewHolder(itemView)
     }
 

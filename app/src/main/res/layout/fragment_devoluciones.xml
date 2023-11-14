@@ -1,5 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/devoluciones"
+    android:id="@+id/fragmentdevoluciones"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
@@ -19,21 +19,10 @@
         android:layout_below="@+id/titleTextView">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerViewDevoluciones"
             android:layout_width="match_parent"
             android:layout_height="685dp"
             android:layout_marginBottom="56dp"
             android:background="@android:color/transparent" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/camara_escaner"
-            android:layout_width="55dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_margin="16dp"
-            android:src="@drawable/vector"
-            android:contentDescription="Button for scanning camera"
-            android:backgroundTint="@color/red" />
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

@@ -1,31 +1,28 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/transitoLayout"
+    android:id="@+id/fragmentEntregados"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/titleTextViewEntregados"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/red"
-        android:text="En transito"
+        android:text="Entregados"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <LinearLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_below="@+id/titleTextView">
+        android:layout_below="@+id/titleTextViewEntregados">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerViewEntregados"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@android:color/transparent" />
-    </LinearLayout>
-
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </RelativeLayout>

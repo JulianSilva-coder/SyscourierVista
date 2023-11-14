@@ -7,18 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.syscourier.databinding.FragmentDevolucionesBinding
 import com.example.syscourier.databinding.FragmentTransitoBinding
 
 data class MydevolucionesObject(val name: String, val description: String, val id: Int)
 
 class Devoluciones : Fragment() {
-    private lateinit var binding: FragmentTransitoBinding
+    private lateinit var binding: FragmentDevolucionesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentTransitoBinding.inflate(inflater, container, false)
+        binding = FragmentDevolucionesBinding.inflate(inflater, container, false)
 
         val data = listOf(
             MydevolucionesObject("Objeto 1", "Descripción del objeto 1", 1234567),
@@ -35,7 +36,7 @@ class Devoluciones : Fragment() {
             MydevolucionesObject("Objeto 6", "Descripción del objeto 6", 1234556)
         )
 
-        val recyclerView = binding.recyclerView
+        val recyclerView = binding.recyclerViewDevoluciones
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         val adapter = AdapterDevoluciones(data, requireContext()) // Asegúrate de tener la clase com.example.syscourier.adapters.AdapterDevoluciones definida y pasando el contexto adecuadamente
         recyclerView.adapter = adapter

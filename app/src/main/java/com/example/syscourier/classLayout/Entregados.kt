@@ -8,17 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.syscourier.GuiaIntro
 import com.example.syscourier.adapters.Adapterentregados
-import com.example.syscourier.databinding.FragmentTransitoBinding
+import com.example.syscourier.databinding.FragmentEntregadosBinding
 
 
 class Entregados : Fragment() {
-    private lateinit var binding: FragmentTransitoBinding
+    private lateinit var binding: FragmentEntregadosBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTransitoBinding.inflate(inflater, container, false)
+        binding = FragmentEntregadosBinding.inflate(inflater, container, false)
 
         val data = listOf(
             GuiaIntro(1234567, "Objeto 1", "Descripción del objeto 1"),
@@ -30,14 +30,15 @@ class Entregados : Fragment() {
             GuiaIntro(1234567, "Objeto 1", "Descripción del objeto 1")
         )
 
-        val recyclerView = binding.recyclerView
+        val recyclerView = binding.recyclerViewEntregados
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = Adapterentregados(data) // Pasar el contexto al adaptador
+
+        // Pasa el contexto al adaptador
+        val adapter = Adapterentregados(data, requireContext())
         recyclerView.adapter = adapter
 
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }

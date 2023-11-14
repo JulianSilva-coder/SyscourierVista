@@ -10,10 +10,10 @@ class devoluciones_activity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_devoluciones)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.devoluciones, Devoluciones())
+        fragmentTransaction.replace(R.id.fragmentdevoluciones, Devoluciones())
         fragmentTransaction.commit()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.devoluciones, Devoluciones())
+            .replace(R.id.fragmentdevoluciones, Devoluciones())
             .commit()
     }
 }

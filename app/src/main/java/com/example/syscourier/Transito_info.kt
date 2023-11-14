@@ -28,10 +28,9 @@ class Transito_info : Fragment() {
             GuiaIntro(1234567, "Objeto 1", "Descripción del objeto 1")
         )
 
-
         val recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = MyAdapter(data) // Utiliza el adaptador existente MyAdapter
+        val adapter = MyAdapter(data, requireContext()) // Utiliza el adaptador existente MyAdapter
         recyclerView.adapter = adapter
 
         return binding.root

@@ -10,10 +10,10 @@ class Entregados_activity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entregados)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.entregados, Entregados())
+        fragmentTransaction.replace(R.id.fragmentEntregados, Entregados())
         fragmentTransaction.commit()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.entregados, Entregados())
+            .replace(R.id.fragmentEntregados, Entregados())
             .commit()
     }
 }

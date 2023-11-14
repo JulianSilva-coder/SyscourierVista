@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.syscourier.MiApp
 import com.example.syscourier.adapters.AsignacionesAdapter
+import com.example.syscourier.adapters.TransporteAdapter
 import com.example.syscourier.databinding.TransporteFragmentBinding
 import com.example.syscourier.dto.GuiaIntroDTO
 import com.google.gson.Gson
@@ -34,7 +35,7 @@ class Transporte : Fragment() {
                 // Verificar si el fragmento aún está adjunto a la actividad
                 if (isAdded) {
                     // Crear el adaptador
-                    val adapter = AsignacionesAdapter(result, requireContext())
+                    val adapter = TransporteAdapter(result, requireContext())
 
                     // Configurar el RecyclerView solo si el adaptador no es nulo
                     if (binding.recyclerView.adapter == null) {

@@ -7,7 +7,7 @@
     tools:context=".fragments.Entregados_info">
 
     <TextView
-        android:id="@+id/entrega_layout"
+        android:id="@+id/transporte_entrega_layout"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:background="@color/red"
@@ -20,7 +20,7 @@
         android:id="@+id/idTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/entrega_layout"
+        android:layout_below="@+id/transporte_entrega_layout"
         android:layout_alignParentStart="true"
         android:layout_marginStart="11dp"
         android:layout_marginTop="2dp"
@@ -29,7 +29,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/idValueTextView"
+        android:id="@+id/transporte_idValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/idTextView"
@@ -51,7 +51,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/productoValueTextView"
+        android:id="@+id/transporte_productoValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/productoTextView"
@@ -99,7 +99,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/remitenteInfoValueTextView"
+        android:id="@+id/transporte_remitenteInfoValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/identificacionRemitenteTextView"
@@ -120,7 +120,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/nombreRemitenteInfoValueTextView"
+        android:id="@+id/transporte_nombreRemitenteInfoValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/nombreRemitenteTextView"
@@ -141,7 +141,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/direccionRemitenteInfoValueTextView"
+        android:id="@+id/transporte_direccionRemitenteInfoValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/direccionRemitenteTextView"
@@ -162,7 +162,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/telefonoRemitenteInfoValueTextView"
+        android:id="@+id/transporte_telefonoRemitenteInfoValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/telefonoRemitenteTextView"
@@ -211,7 +211,7 @@
         android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/identificacionDestinatarioInfoValueTextView"
+        android:id="@+id/transporte_identificacionDestinatarioInfoValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/identificacionDestinatarioTextView"
@@ -231,7 +231,7 @@
         android:layout_marginTop="16dp"/>
 
     <TextView
-        android:id="@+id/nombreDestinatarioInfoValueTextView"
+        android:id="@+id/transporte_nombreDestinatarioInfoValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/nombreDestinatarioTextView"
@@ -251,7 +251,7 @@
         android:layout_marginTop="16dp"/>
 
     <TextView
-        android:id="@+id/direccionDestinatarioInfoValueTextView"
+        android:id="@+id/transporte_direccionDestinatarioInfoValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/direccionDestinatarioTextView"
@@ -272,7 +272,7 @@
 
 
     <TextView
-        android:id="@+id/telefonoDestinatarioInfoValueTextView"
+        android:id="@+id/transporte_telefonoDestinatarioInfoValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/telefonoDestinatarioTextView"
@@ -321,7 +321,7 @@
 
 
     <TextView
-        android:id="@+id/totalInfoValueTextView"
+        android:id="@+id/transporte_totalInfoValueTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/totalFieteTextView"
@@ -330,15 +330,14 @@
         android:text=".."
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/transporte_Entregar"
         android:layout_width="207dp"
         android:layout_height="73dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="0dp"
-
         android:layout_marginEnd="204dp"
         android:layout_marginBottom="0dp"
         android:background="@color/red"
@@ -348,10 +347,10 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView8"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/transporte_devolucion"
         android:layout_width="wrap_content"
-        android:layout_height="72dp"
+        android:layout_height="73dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -366,29 +365,5 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/boton_entregar"
-        android:layout_width="65dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="278dp"
-        android:layout_marginBottom="1dp"
-        android:src="@drawable/entregados_navbar" />
 
-    <ImageView
-        android:id="@+id/boton_devolucion"
-        android:layout_width="65dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="276dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="0dp"
-        android:src="@drawable/devoluciones_navbar" />
 </RelativeLayout>

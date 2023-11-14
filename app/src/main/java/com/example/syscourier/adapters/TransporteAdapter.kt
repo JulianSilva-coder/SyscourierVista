@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.syscourier.dto.GuiaIntroDTO
 import com.example.syscourier.R
 import com.example.syscourier.activities.AsignacionesInfoItemActivity
+import com.example.syscourier.activities.TransporteInfoItemActivity
 
 class TransporteAdapter(private val data: List<GuiaIntroDTO>, private val context: Context) : RecyclerView.Adapter<TransporteAdapter.ViewHolder>() {
 
@@ -32,8 +33,8 @@ class TransporteAdapter(private val data: List<GuiaIntroDTO>, private val contex
         holder.descriptionTextView.text = item.destinatarioDireccion
         holder.idGuia.text = item.id.toString()
         holder.actionButton.setOnClickListener {
-            val intent = Intent(context, AsignacionesInfoItemActivity::class.java)
-            intent.putExtra(AsignacionesInfoItemActivity.EXTRA_ID_GUIA, item.id)
+            val intent = Intent(context, TransporteInfoItemActivity::class.java)
+            intent.putExtra(TransporteInfoItemActivity.EXTRA_ID_GUIA, item.id)
             context.startActivity(intent)
         }
     }

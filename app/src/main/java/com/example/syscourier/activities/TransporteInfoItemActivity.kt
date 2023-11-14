@@ -4,8 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.example.syscourier.R
-import com.example.syscourier.fragments.AsignacionesInfoItemFragment
-import com.example.syscourier.fragments.info_fragment_item
+import com.example.syscourier.fragments.TransporteInfoItemFragment
 
 class TransporteInfoItemActivity : AppCompatActivity(){
 
@@ -14,7 +13,7 @@ class TransporteInfoItemActivity : AppCompatActivity(){
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.asignaciones_activity_info_item)
+        setContentView(R.layout.transporte_activity_info_item)
 
         val guiaId = intent.getIntExtra(TransporteInfoItemActivity.EXTRA_ID_GUIA, -1)
         // Crear una lista de objetos de ejemplo
@@ -25,13 +24,13 @@ class TransporteInfoItemActivity : AppCompatActivity(){
         val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
 
         // Crea una instancia del fragmento y establece los argumentos
-        val fragment = AsignacionesInfoItemFragment()
+        val fragment = TransporteInfoItemFragment()
         val args = Bundle()
-        args.putInt(AsignacionesInfoItemFragment.EXTRA_ID_GUIA, guiaId)
+        args.putInt(TransporteInfoItemFragment.EXTRA_ID_GUIA, guiaId)
         fragment.arguments = args
 
         // Reemplaza el fragmento en el contenedor
-        fragmentTransaction.replace(R.id.asignaciones_info_item, fragment)
+        fragmentTransaction.replace(R.id.info_item_transporte, fragment)
         fragmentTransaction.commit()
     }
 }

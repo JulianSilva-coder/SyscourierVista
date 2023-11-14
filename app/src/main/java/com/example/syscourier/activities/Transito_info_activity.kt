@@ -10,10 +10,10 @@ class Transito_info_activity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.transporte_activity)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.idAsignacion, Transporte())
+        fragmentTransaction.replace(R.id.transporteLayout, Transporte())
         fragmentTransaction.commit()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.idValueTextView, Transporte())
+            .replace(R.id.transporteLayout, Transporte())
             .commit()
     }
 }

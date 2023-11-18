@@ -156,5 +156,4 @@ class Asignaciones : Fragment() {
         // Puedes ajustar esta condición según tus necesidades
         return scannedCode == "231009206610000163"
     }
-
 }

@@ -43,7 +43,6 @@ class Devoluciones_info_item_Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Obtener referencia al Spinner en tu diseño
         val spinner: Spinner = view.findViewById(R.id.spinner)
         view.findViewById<Button>(R.id.Boton_devolucion).setOnClickListener {
             var campoTextoDevolucion: TextView = view.findViewById(R.id.edit_text_area)

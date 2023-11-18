@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -17,10 +18,21 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.example.syscourier.MiApp
 import com.example.syscourier.R
+import com.example.syscourier.activities.Menudesplegable
+import com.example.syscourier.dto.CambioEstadoDTO
+import com.example.syscourier.dto.ErrorDTO
+import com.google.gson.Gson
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -28,35 +40,146 @@ import java.io.OutputStream
 
 class Entregados_infoFragment : Fragment() {
 
+    companion object {
+        const val EXTRA_ID_GUIA = ""
+    }
+
     private val CAMERA_REQUEST_CODE = 1
+    private var imagesUploaded = 0
+    private val MAX_IMAGES_ALLOWED = 1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.entregados_fragment_info, container, false)
+        val vista = inflater.inflate(R.layout.entregados_fragment_info, container, false)
+        return vista
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<ImageButton>(R.id.foto_camera).setOnClickListener {
-            if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    android.Manifest.permission.CAMERA
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
                 openCamera()
             } else {
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(android.Manifest.permission.CAMERA),
+                    CAMERA_REQUEST_CODE
+                )
             }
         }
 
-        view.findViewById<Button>(R.id.button_continuar_entrega).setOnClickListener {
+        view.findViewById<Button>(R.id.button_entrega).setOnClickListener {
             var campoTextoObservacion: TextView = view.findViewById(R.id.edit_text_area)
-            if (campoTextoObservacion.text.isEmpty()){
-                // Continuar acá
+
+            // Verificar si el campo de texto está vacío
+            val campoTextoVacio = campoTextoObservacion.text.isEmpty()
+
+            // Verificar si no se ha subido ninguna imagen
+            val ningunaImagenSubida = imagesUploaded == 0
+
+            // Mostrar mensaje si alguna de las condiciones se cumple
+            if (campoTextoVacio || ningunaImagenSubida) {
+                var mensaje = ""
+                if (campoTextoVacio && ningunaImagenSubida) {
+                    mensaje =
+                        "Es necesario llenar el campo de texto de observaciones y subir una imagen"
+                } else if (campoTextoVacio) {
+                    mensaje = "Es necesario llenar el campo de texto de observaciones"
+                } else if (ningunaImagenSubida) {
+                    mensaje = "Es necesario subir una imagen"
+                }
+                showMessage(mensaje)
+            } else {
+                val guiaId = arguments?.getInt(EXTRA_ID_GUIA, -1) ?: -1
+                AsyncTask.execute {
+                    try {
+                        makePutRequest(
+                            MiApp.BASE_URL + "cambioestado",
+                            guiaId,
+                            campoTextoObservacion.text.toString()
+                        )
+                        val intent = Intent(requireContext(), Menudesplegable::class.java)
+                        requireContext().startActivity(intent)
+                    } catch (e: Exception) {
+                        handleNetworkError(e)
+                    }
+                }
             }
         }
+    }
 
+    private fun makePutRequest(url: String, guiaId: Int, observaciones: String) {
+        val client = OkHttpClient()
+        val cambioEstado = CambioEstadoDTO(
+            guiaId = guiaId,
+            codEstado = 6,
+            motivo = "Entregado",
+            observaciones = observaciones
+        )
+        val gson = Gson()
+        Log.d("ID: ", guiaId.toString())
+        val cambioEstadoJson = gson.toJson(cambioEstado)
+        val requestBody =
+            cambioEstadoJson.toRequestBody("application/json; charset=utf-8".toMediaType())
+        val request = Request.Builder()
+            .addHeader(
+                "Authorization", MiApp.accessToken
+            )
+            .url(url)
+            .put(requestBody)
+            .build()
 
+        val response = client.newCall(request).execute()
+        Log.d("CODIGO!!!", response.code.toString())
+
+        if (response.code == 202) {
+            // Código para el caso 202
+        } else {
+            val responseBody =
+                response.body?.string() ?: throw RuntimeException("Error en la solicitud")
+            // Usa Gson u otra biblioteca para convertir la cadena JSON a una lista de objetos GuiaIntro
+            val gson = Gson()
+            val mensaje =
+                gson.fromJson(responseBody, ErrorDTO::class.java)?.message ?: "Mensaje nulo o vacío"
+
+            // Mostrar el Toast en el hilo principal
+            requireActivity().runOnUiThread {
+                Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun handleNetworkError(exception: Exception) {
+        requireActivity().runOnUiThread {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Error de conexión")
+                .setMessage("Tiempo de espera agotado. Verifica tu conexión a Internet.")
+                .setPositiveButton("Aceptar") { _, _ ->
+                    // Acciones adicionales si es necesario
+                }
+                .show()
+
+            Log.e("NETWORK_ERROR", exception.message, exception)
+        }
+    }
+
+    private fun showMessage(mensaje: String) {
+        requireActivity().runOnUiThread {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Informacion")
+                .setMessage(mensaje)
+                .setPositiveButton("Aceptar") { _, _ ->
+                    // Acciones adicionales si es necesario
+                }
+                .show()
+        }
     }
 
     private fun openCamera() {
@@ -91,6 +214,11 @@ class Entregados_infoFragment : Fragment() {
             addToGallery(file)
 
             Log.d("ImageSaved", "Image saved successfully: ${file.absolutePath}")
+
+            view?.findViewById<TextView>(R.id.info_imagencargada)?.text = file.name
+
+            // Incrementar el contador de imágenes después de guardar la imagen
+            saveImageAndIncrementCounter(bitmap)
         } catch (e: IOException) {
             e.printStackTrace()
             Log.e("ImageSaveError", "Error saving image: ${e.message}")
@@ -102,5 +230,12 @@ class Entregados_infoFragment : Fragment() {
         val contentUri = Uri.fromFile(file)
         mediaScanIntent.data = contentUri
         requireContext().sendBroadcast(mediaScanIntent)
+    }
+
+    private fun saveImageAndIncrementCounter(bitmap: Bitmap) {
+        // Código para guardar la imagen
+
+        // Incrementar el contador de imágenes
+        imagesUploaded++
     }
 }

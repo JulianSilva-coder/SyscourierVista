@@ -38,19 +38,15 @@
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
-        <activity android:name=".activities.AsignacionesActivityInfo">
-        </activity>
-        <activity android:name=".activities.Devoluciones_info_activity">
-        </activity>
-        <activity android:name=".activities.Entregados_infoActivity">
-        </activity>
+        <activity android:name=".activities.AsignacionesActivityInfo"/>
+        <activity android:name=".activities.Devoluciones_info_activity"/>
+        <activity android:name=".activities.Entregados_infoActivity"/>
         <activity android:name=".fragments.Transporte" />
         <activity android:name=".fragments.Entregados_infoFragment" />
-
         <activity android:name=".activities.AsignacionesInfoItemActivity"/>
         <activity android:name=".activities.Transito_info_activity"/>
-        <activity android:name=".activities.TransporteInfoItemActivity">
-        </activity>
+        <activity android:name=".activities.TransporteInfoItemActivity"/>
+        <activity android:name=".activities.final_activity_info"/>
 
     </application>
 

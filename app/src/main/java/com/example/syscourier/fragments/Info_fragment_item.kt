@@ -8,11 +8,11 @@ import androidx.fragment.app.Fragment
 import com.example.syscourier.R
 
 class info_fragment_item : Fragment() {
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-
-
 
     ): View? {
         // Inflar el diseño del fragmento

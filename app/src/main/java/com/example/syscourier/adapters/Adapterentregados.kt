@@ -7,28 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.syscourier.activities.Entregados_infoActivity
 import com.example.syscourier.dto.GuiaIntroDTO
 import com.example.syscourier.R
+import com.example.syscourier.activities.final_activity_info
 
-class Adapterentregados(private val data: List<GuiaIntroDTO>, private val entregadosInfoActivity: Context) :
+class Adapterentregados(private val data: List<GuiaIntroDTO>, private val context: Context) :
     RecyclerView.Adapter<Adapterentregados.ViewHolder>() {
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val idGuia: TextView = itemView.findViewById(R.id.idAsignacion)
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
         val actionButton: Button = itemView.findViewById(R.id.actionButton)
-        val idGuia: TextView = itemView.findViewById(R.id.idAsignacion)
-
-        init {
-            actionButton.text = "Click Me"
-            actionButton.setOnClickListener {
-                val intent = Intent(entregadosInfoActivity, Entregados_infoActivity::class.java)
-                entregadosInfoActivity.startActivity(intent)
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -42,14 +34,10 @@ class Adapterentregados(private val data: List<GuiaIntroDTO>, private val entreg
         holder.nameTextView.text = item.remitenteNombre
         holder.descriptionTextView.text = item.destinatarioDireccion
         holder.idGuia.text = item.id.toString()
-
         holder.actionButton.setOnClickListener {
-            // Aquí puedes definir la lógica que deseas ejecutar cuando se presiona el botón
-            Toast.makeText(
-                holder.itemView.context,
-                "Id del objeto: ${item.id}",
-                Toast.LENGTH_SHORT
-            ).show()
+            val intent = Intent(context, final_activity_info::class.java)
+            intent.putExtra(final_activity_info.EXTRA_ID_GUIA, item.id)
+            context.startActivity(intent)
         }
     }
 

@@ -11,22 +11,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.syscourier.activities.Devoluciones_info_activity
 import com.example.syscourier.fragments.MydevolucionesObject
 import com.example.syscourier.R
+import com.example.syscourier.activities.final_activity_info
+import com.example.syscourier.dto.GuiaIntroDTO
 
-class AdapterDevoluciones(private val data: List<MydevolucionesObject>, private val context: Context) : RecyclerView.Adapter<AdapterDevoluciones.ViewHolder>() {
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val nameTextView: TextView = itemView.findViewById(R.id.nameTextView) ?: throw NullPointerException("NameTextView not found")
-        val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView) ?: throw NullPointerException("DescriptionTextView not found")
-        val actionButton: Button = itemView.findViewById(R.id.actionButton) ?: throw NullPointerException("ActionButton not found")
-
-        init {
-            actionButton.text = "Click Me"
-            actionButton.setOnClickListener {
-                val intent = Intent(context, Devoluciones_info_activity::class.java)
-                context.startActivity(intent)
-            }
-        }
+class AdapterDevoluciones(private val data: List<GuiaIntroDTO>, private val context: Context) : RecyclerView.Adapter<AdapterDevoluciones.ViewHolder>() {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val idGuia: TextView = itemView.findViewById(R.id.idAsignacion)
+        val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
+        val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
+        val actionButton: Button = itemView.findViewById(R.id.actionButton)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.guia_intro_item_layout, parent, false)
         return ViewHolder(itemView)
@@ -34,8 +28,14 @@ class AdapterDevoluciones(private val data: List<MydevolucionesObject>, private 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        holder.nameTextView.text = item.name
-        holder.descriptionTextView.text = item.description
+        holder.nameTextView.text = item.remitenteNombre
+        holder.descriptionTextView.text = item.destinatarioDireccion
+        holder.idGuia.text = item.id.toString()
+        holder.actionButton.setOnClickListener {
+            val intent = Intent(context, final_activity_info::class.java)
+            intent.putExtra(final_activity_info.EXTRA_ID_GUIA, item.id)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

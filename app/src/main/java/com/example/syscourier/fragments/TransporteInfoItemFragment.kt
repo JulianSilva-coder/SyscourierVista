@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.syscourier.MiApp
 import com.example.syscourier.R
+import com.example.syscourier.activities.AsignacionesInfoItemActivity
 import com.example.syscourier.activities.Devoluciones_info_activity
 import com.example.syscourier.activities.Entregados_infoActivity
 import com.example.syscourier.activities.Menudesplegable
@@ -89,11 +90,13 @@ class TransporteInfoItemFragment : Fragment(){
 
 
                     transporte_Entregar_button.setOnClickListener {
-                        val intent = Intent(requireContext(), Entregados_infoActivity::class.java)
+                        val intent = Intent(context, Entregados_infoActivity::class.java)
+                        intent.putExtra(Entregados_infoActivity.EXTRA_ID_GUIA, guiaId)
                         requireContext().startActivity(intent)
                     }
                     transporte_devolucion_button.setOnClickListener {
-                        val intent = Intent(requireContext(), Devoluciones_info_activity::class.java)
+                        val intent = Intent(context, Devoluciones_info_activity::class.java)
+                        intent.putExtra(Devoluciones_info_activity.EXTRA_ID_GUIA, guiaId)
                         requireContext().startActivity(intent)
                     }
                 }

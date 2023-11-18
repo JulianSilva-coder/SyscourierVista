@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/entregadosLayout"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/entregadosLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.Entregados_infoFragment">
@@ -17,10 +17,9 @@
         android:textSize="30sp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_continuar_entrega"
+        android:id="@+id/button_entrega"
         android:layout_width="410dp"
         android:layout_height="76dp"
-        android:gravity="center_vertical|center_horizontal"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -28,7 +27,8 @@
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="2dp"
         android:background="@color/red"
-        android:text="Continuar"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="Entregar"
         android:textColor="@color/white"
         android:textSize="30sp" />
 
@@ -68,31 +68,33 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:layout_below="@+id/edit_text_area"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:text="Archivo subido"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        >
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="171dp"
-        android:layout_height="43dp"
-        android:layout_below="@+id/edit_text_area"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="13dp"
-        android:gravity="center"
-        android:text="Imagen"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Archivo subido"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/info_imagencargada"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="No se ha seleccionado un archivo"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/foto_camera"

@@ -67,7 +67,7 @@ class TransporteInfoItemFragment : Fragment(){
 
         AsyncTask.execute {
             try {
-                val result = makeGetRequest("http://18.221.165.81:80/guiainfo/${guiaId}")
+                val result = makeGetRequest(MiApp.BASE_URL + "guiainfo/${guiaId}")
                 Log.d("Resultado", result.toString())
                 activity?.runOnUiThread {
                     transporte_idValueTextView.text = result.id.toString()

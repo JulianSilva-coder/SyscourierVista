@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Entregados_info">
+    tools:context=".fragments.Entregados_infoFragment">
 
     <TextView
         android:id="@+id/entrega_layout"
@@ -16,10 +16,11 @@
         android:textColor="@color/white"
         android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/textView6"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_continuar_entrega"
         android:layout_width="410dp"
-        android:layout_height="106dp"
+        android:layout_height="76dp"
+        android:gravity="center_vertical|center_horizontal"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
@@ -28,7 +29,6 @@
         android:layout_marginBottom="2dp"
         android:background="@color/red"
         android:text="Continuar"
-        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp" />
 
@@ -106,18 +106,5 @@
         android:layout_marginEnd="152dp"
         android:background="@color/red"
         android:src="@android:drawable/ic_menu_camera" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="65dp"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/textView6"
-        android:layout_alignTop="@+id/textView6"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="173dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="172dp"
-        android:src="@android:drawable/ic_media_play" />
-
 
 </RelativeLayout>

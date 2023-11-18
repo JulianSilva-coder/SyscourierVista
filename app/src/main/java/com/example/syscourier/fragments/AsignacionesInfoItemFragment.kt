@@ -11,6 +11,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.syscourier.MiApp
 import com.example.syscourier.R
 import com.example.syscourier.activities.AsignacionesInfoItemActivity
@@ -24,6 +25,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class AsignacionesInfoItemFragment : Fragment() {
 
@@ -68,7 +70,7 @@ class AsignacionesInfoItemFragment : Fragment() {
 
         AsyncTask.execute {
             try {
-                val result = makeGetRequest("http://18.221.165.81:80/guiainfo/${guiaId}")
+                val result = makeGetRequest(MiApp.BASE_URL + "guiainfo/${guiaId}")
                 Log.d("Resultado", result.toString())
                 activity?.runOnUiThread {
                     asignaciones_idValueTextView.text = result.id.toString()
@@ -91,15 +93,19 @@ class AsignacionesInfoItemFragment : Fragment() {
 
                     asignaciones_info_button.setOnClickListener {
                         AsyncTask.execute {
-                            makePutRequest("http://18.221.165.81:80/cambioestado", guiaId)
-                            val intent = Intent(requireContext(), Menudesplegable::class.java)
-                            requireContext().startActivity(intent)
+                            try {
+                                makePutRequest(MiApp.BASE_URL + "cambioestado", guiaId)
+                                val intent = Intent(requireContext(), Menudesplegable::class.java)
+                                requireContext().startActivity(intent)
+                            } catch (e: Exception) {
+                                handleNetworkError(e)
+                            }
                         }
                     }
 
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                handleNetworkError(e)
             }
         }
 
@@ -123,12 +129,32 @@ class AsignacionesInfoItemFragment : Fragment() {
         return gson.fromJson(responseBody, GuiaInfoDTO::class.java)
     }
 
+    private fun handleNetworkError(exception: Exception) {
+        requireActivity().runOnUiThread {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Error de conexión")
+                .setMessage("Tiempo de espera agotado. Verifica tu conexión a Internet.")
+                .setPositiveButton("Aceptar") { _, _ ->
+                    // Acciones adicionales si es necesario
+                }
+                .show()
+
+            Log.e("NETWORK_ERROR", exception.message, exception)
+        }
+    }
+
     private fun makePutRequest(url: String, guiaId: Int) {
         val client = OkHttpClient()
-        val cambioEstado = CambioEstadoDTO(guiaId = guiaId, codEstado = 8, motivo = "En transporte", observaciones = "En transporte")
+        val cambioEstado = CambioEstadoDTO(
+            guiaId = guiaId,
+            codEstado = 8,
+            motivo = "En transporte",
+            observaciones = "En transporte"
+        )
         val gson = Gson()
         val cambioEstadoJson = gson.toJson(cambioEstado)
-        val requestBody = RequestBody.create("application/json; charset=utf-8".toMediaType(), cambioEstadoJson)
+        val requestBody =
+            cambioEstadoJson.toRequestBody("application/json; charset=utf-8".toMediaType())
         val request = Request.Builder()
             .addHeader(
                 "Authorization", MiApp.accessToken
@@ -147,7 +173,8 @@ class AsignacionesInfoItemFragment : Fragment() {
                 response.body?.string() ?: throw RuntimeException("Error en la solicitud")
             // Usa Gson u otra biblioteca para convertir la cadena JSON a una lista de objetos GuiaIntro
             val gson = Gson()
-            val mensaje = gson.fromJson(responseBody, ErrorDTO::class.java)?.message ?: "Mensaje nulo o vacío"
+            val mensaje =
+                gson.fromJson(responseBody, ErrorDTO::class.java)?.message ?: "Mensaje nulo o vacío"
 
             // Mostrar el Toast en el hilo principal
             requireActivity().runOnUiThread {

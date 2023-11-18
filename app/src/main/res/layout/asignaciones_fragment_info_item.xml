@@ -1,70 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/asignaciones_info_item_Layout"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/asignaciones_info_item_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Entregados_info">
+    android:orientation="vertical"
+    tools:context=".fragments.Entregados_infoFragment">
 
     <TextView
         android:id="@+id/asignaciones_entrega_layout"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
+        android:layout_height="wrap_content"
         android:background="@color/red"
         android:text="Información"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/asignaciones_idTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/asignaciones_entrega_layout"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="2dp"
-        android:text="ID"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/asignaciones_idValueTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_idTextView"
-        android:layout_marginStart="307dp"
-        android:layout_toEndOf="@id/asignaciones_idTextView"
-        android:text=".."
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/asignaciones_idTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="ID"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/asignaciones_productoTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/asignaciones_idTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="12dp"
-        android:text="Producto"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/asignaciones_idValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/asignaciones_productoValueTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_productoTextView"
-        android:layout_marginStart="247dp"
-        android:layout_toEndOf="@id/asignaciones_productoTextView"
-        android:text=".."
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/asignaciones_productoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Producto"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/asignaciones_productoValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <View
         android:id="@+id/asignaciones_dividerRemitente"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_above="@id/asignaciones_remitenteTextView"
         android:layout_marginBottom="-6dp"
         android:background="@android:color/darker_gray" />
 
@@ -72,110 +78,120 @@
         android:id="@+id/asignaciones_remitenteTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/asignaciones_productoTextView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="155dp"
         android:layout_marginTop="11dp"
         android:text="Remitente"
         android:textSize="20sp"
         android:textStyle="bold" />
+
     <View
         android:id="@+id/asignaciones_divider1Remitente"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_above="@id/asignaciones_identificacionRemitenteTextView"
         android:layout_marginBottom="-6dp"
         android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/asignaciones_identificacionRemitenteTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/asignaciones_remitenteTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="15dp"
-        android:text="Identificacion"
-        android:textSize="20sp" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/asignaciones_remitenteInfoValueTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_identificacionRemitenteTextView"
-        android:layout_marginStart="212dp"
-        android:layout_toEndOf="@id/asignaciones_identificacionRemitenteTextView"
-        android:text=".."
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/asignaciones_identificacionRemitenteTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Identificacion"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/asignaciones_nombreRemitenteTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/asignaciones_identificacionRemitenteTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="10dp"
-        android:text="Nombre"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/asignaciones_remitenteInfoValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/asignaciones_nombreRemitenteInfoValueTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_nombreRemitenteTextView"
-        android:layout_marginStart="256dp"
-        android:layout_toEndOf="@id/asignaciones_nombreRemitenteTextView"
-        android:text=".."
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/asignaciones_direccionRemitenteTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/asignaciones_nombreRemitenteTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="8dp"
-        android:text="Direccion"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/asignaciones_nombreRemitenteTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nombre"
+            android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/asignaciones_direccionRemitenteInfoValueTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_direccionRemitenteTextView"
-        android:layout_marginStart="245dp"
-        android:layout_toEndOf="@id/asignaciones_direccionRemitenteTextView"
-        android:text=".."
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/asignaciones_nombreRemitenteInfoValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/asignaciones_telefonoRemitenteTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/asignaciones_direccionRemitenteTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="13dp"
-        android:text="Telefono"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/asignaciones_telefonoRemitenteInfoValueTextView"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/asignaciones_direccionRemitenteTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Direccion"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/asignaciones_direccionRemitenteInfoValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_telefonoRemitenteTextView"
-        android:layout_marginStart="253dp"
-        android:layout_toEndOf="@id/asignaciones_telefonoRemitenteTextView"
-        android:text=".."
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/asignaciones_telefonoRemitenteTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Telefono"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/asignaciones_telefonoRemitenteInfoValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <View
         android:id="@+id/asignaciones_dividerDestinatario"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_above="@id/asignaciones_destinatarioTextView"
         android:layout_marginBottom="-6dp"
         android:background="@android:color/darker_gray" />
 
@@ -183,7 +199,6 @@
         android:id="@+id/asignaciones_destinatarioTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/asignaciones_telefonoRemitenteTextView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="153dp"
         android:layout_marginTop="7dp"
@@ -195,97 +210,110 @@
         android:id="@+id/asignaciones_divider2Remitente"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_above="@id/asignaciones_identificacionDestinatarioTextView"
         android:layout_marginBottom="-6dp"
         android:background="@android:color/darker_gray" />
 
-    <TextView
-        android:id="@+id/asignaciones_identificacionDestinatarioTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/asignaciones_destinatarioTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="2dp"
-        android:text="Identificacion"
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/asignaciones_identificacionDestinatarioInfoValueTextView"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/asignaciones_identificacionDestinatarioTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Identificacion"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/asignaciones_identificacionDestinatarioInfoValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_identificacionDestinatarioTextView"
-        android:layout_marginStart="211dp"
-        android:layout_toEndOf="@id/asignaciones_identificacionDestinatarioTextView"
-        android:text=".."
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/asignaciones_nombreDestinatarioTextView"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/asignaciones_nombreDestinatarioTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nombre"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/asignaciones_nombreDestinatarioInfoValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre"
-        android:textSize="20sp"
-        android:layout_below="@id/asignaciones_identificacionDestinatarioTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="16dp"/>
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/asignaciones_nombreDestinatarioInfoValueTextView"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/asignaciones_direccionDestinatarioTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Direccion"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/asignaciones_direccionDestinatarioInfoValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_nombreDestinatarioTextView"
-        android:layout_marginStart="257dp"
-        android:layout_toEndOf="@id/asignaciones_nombreDestinatarioTextView"
-        android:text=".."
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/asignaciones_direccionDestinatarioTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Direccion"
-        android:textSize="20sp"
-        android:layout_below="@id/asignaciones_nombreDestinatarioTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="16dp"/>
-
-    <TextView
-        android:id="@+id/asignaciones_direccionDestinatarioInfoValueTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_direccionDestinatarioTextView"
-        android:layout_marginStart="245dp"
-        android:layout_toEndOf="@id/asignaciones_direccionDestinatarioTextView"
-        android:text=".."
-        android:textSize="20sp" />
-
-    <TextView
-        android:id="@+id/asignaciones_telefonoDestinatarioTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Telefono"
-        android:textSize="20sp"
-        android:layout_below="@id/asignaciones_direccionDestinatarioTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="16dp"/>
+        <TextView
+            android:id="@+id/asignaciones_telefonoDestinatarioTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Telefono"
+            android:textSize="20sp" />
 
 
-    <TextView
-        android:id="@+id/asignaciones_telefonoDestinatarioInfoValueTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_telefonoDestinatarioTextView"
-        android:layout_marginStart="253dp"
-        android:layout_toEndOf="@id/asignaciones_telefonoDestinatarioTextView"
-        android:text=".."
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/asignaciones_telefonoDestinatarioInfoValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <View
         android:id="@+id/asignaciones_dividerTotal"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_above="@id/asignaciones_totalTextView"
         android:layout_marginBottom="-3dp"
         android:background="@android:color/darker_gray" />
 
@@ -293,58 +321,50 @@
         android:id="@+id/asignaciones_totalTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/asignaciones_telefonoDestinatarioTextView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="185dp"
         android:layout_marginTop="4dp"
         android:text="Total"
         android:textSize="20sp"
         android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/asignaciones_totalFieteTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/asignaciones_totalTextView"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="2dp"
-        android:text="Total Fiete"
-        android:textSize="20sp" />
     <View
         android:id="@+id/asignaciones_divider3Remitente"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_above="@id/asignaciones_totalFieteTextView"
-        android:layout_marginBottom="-6dp"
         android:background="@android:color/darker_gray" />
 
-
-    <TextView
-        android:id="@+id/asignaciones_totalInfoValueTextView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/asignaciones_totalFieteTextView"
-        android:layout_marginStart="236dp"
-        android:layout_toEndOf="@id/asignaciones_totalFieteTextView"
-        android:text=".."
-        android:textSize="20sp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_weight="2">
+
+        <TextView
+            android:id="@+id/asignaciones_totalFieteTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total Flete"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/asignaciones_totalInfoValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text=".."
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/asignaciones_info_button"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
         android:background="@color/red"
-        android:gravity="center"
         android:text="Transportar"
         android:textColor="@color/white"
         android:textSize="20sp"
+        android:layout_marginBottom="-20dp"
         android:textStyle="bold" />
 
-</RelativeLayout>
+</LinearLayout>

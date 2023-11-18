@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.syscourier.dto.GuiaIntroDTO
@@ -28,14 +29,14 @@ class Asignaciones : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = AsignacionesFragmentBinding.inflate(inflater, container, false)
         binding.camaraEscaner.setOnClickListener { initScanner() }
 
         // Crear una lista de objetos de ejemplo
         AsyncTask.execute {
             try {
-                val result = makeGetRequest("http://18.221.165.81:80/guiasIntro/1")
+                val result = makeGetRequest(MiApp.BASE_URL + "guiasIntro/1")
                 Log.d("Resultado", result.toString())
 
                 // Verificar si el fragmento aún está adjunto a la actividad
@@ -55,7 +56,7 @@ class Asignaciones : Fragment() {
                     }
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
+                handleNetworkError(e)
             }
         }
 
@@ -65,20 +66,44 @@ class Asignaciones : Fragment() {
     private fun makeGetRequest(url: String): List<GuiaIntroDTO> {
         val client = OkHttpClient()
         val request = Request.Builder()
-            .addHeader(
-                "Authorization", MiApp.accessToken
-            )
+            .addHeader("Authorization", MiApp.accessToken)
             .url(url)
             .build()
 
         val response = client.newCall(request).execute()
-        val responseBody =
-            response.body?.string() ?: throw RuntimeException("Error en la solicitud")
+
+        if (response.body == null) {
+            Toast.makeText(requireContext(), "No hay asignaciones", Toast.LENGTH_SHORT).show()
+            return emptyList()
+        }
+
+        // El cuerpo de la respuesta no es nulo, procede con la conversión
+        val responseBody = response.body!!.string()
 
         // Usa Gson u otra biblioteca para convertir la cadena JSON a una lista de objetos GuiaIntro
         val gson = Gson()
         val guiasIntroType = object : TypeToken<List<GuiaIntroDTO>>() {}.type
-        return gson.fromJson(responseBody, guiasIntroType)
+
+        // Verifica si la cadena JSON no es nula antes de intentar la conversión
+        return if (responseBody.isNotEmpty()) {
+            gson.fromJson(responseBody, guiasIntroType)
+        } else {
+            emptyList()
+        }
+    }
+
+    private fun handleNetworkError(exception: Exception) {
+        requireActivity().runOnUiThread {
+            AlertDialog.Builder(requireContext())
+                .setTitle("Error de conexión")
+                .setMessage("Tiempo de espera agotado. Verifica tu conexión a Internet.")
+                .setPositiveButton("Aceptar") { _, _ ->
+                    // Acciones adicionales si es necesario
+                }
+                .show()
+
+            Log.e("NETWORK_ERROR", exception.message, exception)
+        }
     }
 
     private fun initScanner() {

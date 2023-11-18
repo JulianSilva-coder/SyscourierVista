@@ -4,6 +4,7 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.syscourier.MiApp
 import com.example.syscourier.R
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -18,7 +19,7 @@ class AsignacionesActivityInfo : AppCompatActivity() {
 
         AsyncTask.execute {
             try {
-                val result = makeGetRequest("http://18.221.165.81:80/guiainfo/$id")
+                val result = makeGetRequest(MiApp.BASE_URL + "guiainfo/$id")
                 runOnUiThread {
                     // Manejar la respuesta aquí
                     Toast.makeText(this@AsignacionesActivityInfo, result, Toast.LENGTH_SHORT).show()

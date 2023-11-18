@@ -13,7 +13,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -23,7 +26,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
 
-class Entregados_info : Fragment() {
+class Entregados_infoFragment : Fragment() {
 
     private val CAMERA_REQUEST_CODE = 1
 
@@ -37,6 +40,7 @@ class Entregados_info : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         view.findViewById<ImageButton>(R.id.foto_camera).setOnClickListener {
             if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 openCamera()
@@ -44,6 +48,15 @@ class Entregados_info : Fragment() {
                 ActivityCompat.requestPermissions(requireActivity(), arrayOf(android.Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
             }
         }
+
+        view.findViewById<Button>(R.id.button_continuar_entrega).setOnClickListener {
+            var campoTextoObservacion: TextView = view.findViewById(R.id.edit_text_area)
+            if (campoTextoObservacion.text.isEmpty()){
+                // Continuar acá
+            }
+        }
+
+
     }
 
     private fun openCamera() {

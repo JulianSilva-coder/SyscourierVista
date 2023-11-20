@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.syscourier.dto.GuiaIntroDTO
 import com.example.syscourier.MiApp
+import com.example.syscourier.activities.AsignacionesInfoItemActivity
 import com.example.syscourier.activities.TransporteInfoItemActivity
+import com.example.syscourier.activities.scanner_info_activity
 import com.example.syscourier.adapters.AsignacionesAdapter
 import com.example.syscourier.databinding.AsignacionesFragmentBinding
 import com.google.gson.Gson
@@ -128,32 +130,12 @@ class Asignaciones : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
 
-                // 1. Traer la información por el codigo de la guía que leyó
-                // 2. Mostrar esa info en una nueva ventana (Le tiene que pasar el Id de la guia)
-                // 3. Al button, le tiene que poner un listener con la petición de realizar la asignación
-
-                // Verifica si el código escaneado coincide con algún criterio
-                if (codigoCoincide(scannedCode)) {
-                    // Si coincide, inicia la nueva actividad
-                    val intent = Intent(requireContext(), TransporteInfoItemActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    // Si no coincide, puedes realizar alguna acción adicional o simplemente mostrar un mensaje
-                    Toast.makeText(
-                        requireContext(),
-                        "El código escaneado no coincide con el criterio deseado",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                val intent = Intent(requireContext(), scanner_info_activity::class.java)
+                intent.putExtra(scanner_info_activity.EXTRA_ID_GUIA, scannedCode.toInt())
+                requireContext().startActivity(intent)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }
-    }
-
-    // Función para verificar si el código escaneado coincide con algún criterio
-    private fun codigoCoincide(scannedCode: String): Boolean {
-        // Puedes ajustar esta condición según tus necesidades
-        return scannedCode == "231009206610000163"
     }
 }

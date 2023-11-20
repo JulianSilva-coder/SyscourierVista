@@ -47,7 +47,7 @@
         <activity android:name=".activities.Transito_info_activity"/>
         <activity android:name=".activities.TransporteInfoItemActivity"/>
         <activity android:name=".activities.final_activity_info"/>
-
+        <activity android:name=".activities.scanner_info_activity"/>
     </application>
 
 </manifest>

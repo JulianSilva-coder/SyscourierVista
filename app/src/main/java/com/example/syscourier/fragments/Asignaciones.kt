@@ -1,3 +1,10 @@
+/**
+ * Fragmento encargado de manejar y mostrar las asignaciones disponibles para un usuario.
+ * Permite escanear códigos de barras para obtener información específica de una asignación.
+ * Utiliza un RecyclerView para mostrar las asignaciones disponibles.
+ *
+ * @author Julian Silva
+ */
 package com.example.syscourier.fragments
 
 import android.content.Intent
@@ -27,7 +34,16 @@ import okhttp3.Request
 class Asignaciones : Fragment() {
 
     private lateinit var binding: AsignacionesFragmentBinding
-
+    /**
+     * Función que se llama para crear y devolver la vista asociada con el fragmento.
+     * Configura el RecyclerView para mostrar las asignaciones disponibles.
+     *
+     * @param inflater El objeto LayoutInflater que se utiliza para inflar cualquier vista en el fragmento.
+     * @param container Si no es nulo, este es el padre al que se adjuntará la vista resultante.
+     * @param savedInstanceState Si no es nulo, este fragmento está siendo reconstruido a partir de un estado guardado anteriormente.
+     *
+     * @return La vista raíz del fragmento.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -65,6 +81,15 @@ class Asignaciones : Fragment() {
         return binding.root
     }
 
+    /**
+     * Realiza una solicitud GET para obtener la lista de asignaciones del servidor.
+     *
+     * @param url La URL del servidor desde donde se obtendrán las asignaciones.
+     *
+     * @return La lista de objetos GuiaIntroDTO obtenidos del servidor.
+     *
+     * @author Nicolas Peña
+     */
     private fun makeGetRequest(url: String): List<GuiaIntroDTO> {
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -93,7 +118,13 @@ class Asignaciones : Fragment() {
             emptyList()
         }
     }
-
+    /**
+     * Maneja los errores de red mostrando un mensaje de alerta al usuario.
+     *
+     * @param exception La excepción que representa el error de red.
+     *
+     * @author Nicolas Peña
+     */
     private fun handleNetworkError(exception: Exception) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext())
@@ -107,7 +138,11 @@ class Asignaciones : Fragment() {
             Log.e("NETWORK_ERROR", exception.message, exception)
         }
     }
-
+    /**
+     * Inicializa el escáner de códigos de barras utilizando la biblioteca ZXing.
+     * Muestra la información asociada al código de barras escaneado.
+     * @author Julian Silva
+     */
     private fun initScanner() {
         val integrator = IntentIntegrator.forSupportFragment(this)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
@@ -116,6 +151,16 @@ class Asignaciones : Fragment() {
         integrator.setBeepEnabled(true)
         integrator.initiateScan()
     }
+
+    /**
+     * Método que maneja el resultado del escaneo de códigos de barras.
+     * Muestra información o realiza acciones basadas en el código de barras escaneado.
+     *
+     * @param requestCode El código de solicitud original pasado a startActivityForResult().
+     * @param resultCode El código de resultado devuelto por la actividad.
+     * @param data Un Intent opcional con datos resultantes.
+     * @author Julian Silva
+     */
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)

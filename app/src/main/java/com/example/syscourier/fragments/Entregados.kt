@@ -23,7 +23,14 @@ import okhttp3.Request
 
 class Entregados : Fragment() {
     private lateinit var binding: EntregadosFragmentBinding
-
+    /**
+     * Crea y devuelve la vista asociada al fragmento.
+     *
+     * @param inflater El inflater utilizado para inflar la vista.
+     * @param container El contenedor para la vista.
+     * @param savedInstanceState Estado previamente guardado, si lo hay.
+     * @return La vista inflada para el fragmento.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,7 +64,12 @@ class Entregados : Fragment() {
         }
         return binding.root
     }
-
+    /**
+     * Realiza una solicitud GET al servidor para obtener datos de entregas.
+     *
+     * @param url La URL de la solicitud.
+     * @return La lista de objetos GuiaIntroDTO obtenida de la solicitud.
+     */
     private fun makeGetRequest(url: String): List<GuiaIntroDTO> {
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -71,7 +83,11 @@ class Entregados : Fragment() {
             Toast.makeText(requireContext(), "No hay entregas", Toast.LENGTH_SHORT).show()
             return emptyList()
         }
-
+        /**
+         * Maneja errores de red, mostrando un diálogo al usuario.
+         *
+         * @param exception La excepción ocurrida.
+         */
         // El cuerpo de la respuesta no es nulo, procede con la conversión
         val responseBody = response.body!!.string()
 
@@ -100,8 +116,12 @@ class Entregados : Fragment() {
             Log.e("NETWORK_ERROR", exception.message, exception)
         }
     }
-
-
+    /**
+     * Lógica para la creación de la vista del fragmento.
+     *
+     * @param view La vista creada.
+     * @param savedInstanceState Estado previamente guardado, si lo hay.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }

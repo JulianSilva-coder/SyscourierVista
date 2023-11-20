@@ -1,3 +1,18 @@
+/**
+ * Fragmento encargado de mostrar las devoluciones realizadas.
+ * Muestra una lista de devoluciones obtenidas desde el servidor y las presenta en un RecyclerView.
+ * Utiliza un adaptador personalizado (AdapterDevoluciones) para visualizar la información de las devoluciones.
+ * Se comunica con el servidor para obtener los datos necesarios y manejar posibles errores de red.
+ *
+ * @param name El nombre de la devolución.
+ * @param description La descripción de la devolución.
+ * @param id El identificador único de la devolución.
+ *
+ * @property binding Variable que almacena la referencia al diseño (layout) asociado a este fragmento.
+ * @constructor Crea una instancia de Devoluciones.
+ *
+ * @author Julian Silva
+ */
 package com.example.syscourier.fragments
 
 import android.os.AsyncTask
@@ -24,7 +39,15 @@ data class MydevolucionesObject(val name: String, val description: String, val i
 
 class Devoluciones : Fragment() {
     private lateinit var binding: DevolucionesFragmentBinding
-
+    /**
+     * Crea y devuelve la vista asociada con el fragmento.
+     *
+     * @param inflater El objeto LayoutInflater que se utiliza para inflar cualquier vista en el fragmento.
+     * @param container Si no es nulo, este es el padre al que se adjuntará la vista resultante.
+     * @param savedInstanceState Si no es nulo, este fragmento está siendo reconstruido a partir de un estado guardado anteriormente.
+     *
+     * @return La vista raíz del fragmento.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,6 +81,14 @@ class Devoluciones : Fragment() {
         }
         return binding.root
     }
+
+    /**
+     * Realiza una solicitud GET para obtener las devoluciones desde el servidor.
+     *
+     * @param url La URL del servidor desde donde se obtendrán las devoluciones.
+     *
+     * @return Una lista de objetos GuiaIntroDTO que representan las devoluciones obtenidas.
+     */
     private fun makeGetRequest(url: String): List<GuiaIntroDTO> {
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -86,7 +117,11 @@ class Devoluciones : Fragment() {
             emptyList()
         }
     }
-
+    /**
+     * Maneja los errores de red mostrando un mensaje de alerta al usuario.
+     *
+     * @param exception La excepción que representa el error de red.
+     */
     private fun handleNetworkError(exception: Exception) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext())

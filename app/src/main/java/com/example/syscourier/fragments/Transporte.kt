@@ -1,5 +1,4 @@
 package com.example.syscourier.fragments
-
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
@@ -19,9 +18,21 @@ import com.google.gson.reflect.TypeToken
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
+/**
+ * Fragmento que muestra una lista de elementos relacionados con transporte obtenidos mediante
+ * una solicitud HTTP.
+ */
 class Transporte : Fragment() {
     private lateinit var binding: TransporteFragmentBinding
-
+    /**
+     * Infla la vista del fragmento y muestra la lista de elementos relacionados con transporte
+     * obtenidos mediante una solicitud HTTP.
+     *
+     * @param inflater El inflater utilizado para inflar la vista del fragmento.
+     * @param container El contenedor donde se inserta la vista del fragmento.
+     * @param savedInstanceState El estado previamente guardado del fragmento, si existe.
+     * @return La vista inflada del fragmento.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,7 +67,12 @@ class Transporte : Fragment() {
         }
         return binding.root
     }
-
+    /**
+     * Realiza una solicitud GET a la URL proporcionada y devuelve una lista de objetos GuiaIntroDTO.
+     *
+     * @param url La URL a la que se realizará la solicitud GET.
+     * @return Una lista de objetos GuiaIntroDTO obtenida como respuesta de la solicitud.
+     */
     private fun makeGetRequest(url: String): List<GuiaIntroDTO> {
         val client = OkHttpClient()
         val request = Request.Builder()

@@ -1,5 +1,4 @@
 package com.example.syscourier.fragments
-
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
@@ -13,10 +12,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.syscourier.MiApp
 import com.example.syscourier.R
-import com.example.syscourier.activities.AsignacionesInfoItemActivity
 import com.example.syscourier.activities.Devoluciones_info_activity
 import com.example.syscourier.activities.Entregados_infoActivity
-import com.example.syscourier.activities.Menudesplegable
 import com.example.syscourier.dto.CambioEstadoDTO
 import com.example.syscourier.dto.ErrorDTO
 import com.example.syscourier.dto.GuiaInfoDTO
@@ -30,6 +27,16 @@ class TransporteInfoItemFragment : Fragment(){
     companion object {
         const val EXTRA_ID_GUIA = ""
     }
+
+    /**
+     * Infla y devuelve la vista del fragmento con los datos del elemento de transporte.
+     *
+     * @param inflater El LayoutInflater utilizado para inflar la vista.
+     * @param container El ViewGroup donde se va a mostrar la vista.
+     * @param savedInstanceState El estado guardado de la instancia.
+     * @return La vista inflada del fragmento.
+     */
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -107,7 +114,13 @@ class TransporteInfoItemFragment : Fragment(){
 
         return view
     }
-
+    /**
+     * Realiza una solicitud GET a la URL proporcionada y devuelve un objeto GuiaInfoDTO.
+     *
+     * @param url La URL a la que se realizará la solicitud GET.
+     * @return Un objeto GuiaInfoDTO obtenido como respuesta de la solicitud.
+     * @throws RuntimeException Si hay algún error en la solicitud.
+     */
     private fun makeGetRequest(url: String): GuiaInfoDTO {
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -124,7 +137,12 @@ class TransporteInfoItemFragment : Fragment(){
         val gson = Gson()
         return gson.fromJson(responseBody, GuiaInfoDTO::class.java)
     }
-
+    /**
+     * Realiza una solicitud PUT a la URL proporcionada para cambiar el estado de una guía.
+     *
+     * @param url La URL a la que se realizará la solicitud PUT.
+     * @param guiaId El identificador de la guía a la que se cambiará el estado.
+     */
     private fun makePutRequest(url: String, guiaId: Int) {
         val client = OkHttpClient()
         val cambioEstado = CambioEstadoDTO(guiaId = guiaId, codEstado = 8, motivo = "En transporte", observaciones = "En transporte")

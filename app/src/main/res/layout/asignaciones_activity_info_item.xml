@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    Archivo XML que define la estructura de diseño de una pantalla en Android.
+    Utiliza ConstraintLayout de androidx como contenedor principal.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--
+        FrameLayout se usa como contenedor principal para información de asignaciones en la pantalla.
+        Tiene el identificador '@+id/asignaciones_info_item'.
+    -->
     <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/asignaciones_info_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

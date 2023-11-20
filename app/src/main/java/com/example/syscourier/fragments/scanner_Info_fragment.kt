@@ -24,12 +24,24 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-
+/**
+ * Fragmento que muestra información detallada de una asignación mediante solicitudes HTTP.
+ * Permite visualizar datos del remitente, destinatario y realizar actualizaciones.
+ * Autor: Julian Silva
+ * Fecha de creación: 20 de noviembre de 2023
+ */
 class scanner_Info_fragment: Fragment() {
     companion object {
         const val EXTRA_ID_GUIA = "extra_id_guia"
     }
-
+    /**
+     * Infla la vista del fragmento y realiza operaciones de red para obtener información de la asignación.
+     *
+     * @param inflater El inflater utilizado para inflar la vista del fragmento.
+     * @param container El contenedor donde se inserta la vista del fragmento.
+     * @param savedInstanceState El estado previamente guardado del fragmento, si existe.
+     * @return La vista inflada del fragmento.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -108,7 +120,13 @@ class scanner_Info_fragment: Fragment() {
 
         return view
     }
-
+    /**
+     * Realiza una solicitud GET a la URL proporcionada y devuelve un objeto GuiaInfoDTO.
+     *
+     * @param url La URL a la que se realizará la solicitud GET.
+     * @return Un objeto GuiaInfoDTO obtenido como respuesta de la solicitud.
+     * @throws RuntimeException Si hay algún error en la solicitud.
+     */
     private fun makeGetRequest(url: String): GuiaInfoDTO {
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -125,7 +143,11 @@ class scanner_Info_fragment: Fragment() {
         val gson = Gson()
         return gson.fromJson(responseBody, GuiaInfoDTO::class.java)
     }
-
+    /**
+     * Maneja los errores de red mostrando un mensaje de error al usuario y registrando el error en los logs.
+     *
+     * @param exception La excepción que representa el error de red.
+     */
     private fun handleNetworkError(exception: Exception) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext())
@@ -139,7 +161,11 @@ class scanner_Info_fragment: Fragment() {
             Log.e("NETWORK_ERROR", exception.message, exception)
         }
     }
-
+    /**
+     * Realiza una solicitud PUT a la URL proporcionada y maneja la respuesta según el código de estado.
+     *
+     * @param url La URL a la que se realizará la solicitud PUT.
+     */
     private fun makePutRequest(url: String) {
         val client = OkHttpClient()
 

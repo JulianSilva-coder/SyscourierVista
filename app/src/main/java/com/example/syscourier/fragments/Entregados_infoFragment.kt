@@ -1,5 +1,5 @@
-package com.example.syscourier.fragments
 
+package com.example.syscourier.fragments
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
@@ -37,7 +37,14 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
-
+/**
+ * Fragmento que muestra información relacionada con entregas.
+ * Permite capturar imágenes, registrar observaciones y realizar cambios de estado en la aplicación.
+ * @property EXTRA_ID_GUIA Identificador extra para la guía.
+ * @property CAMERA_REQUEST_CODE Código de solicitud para la cámara.
+ * @property imagesUploaded Contador de imágenes cargadas.
+ * @property MAX_IMAGES_ALLOWED Número máximo de imágenes permitidas.
+ */
 class Entregados_infoFragment : Fragment() {
 
     companion object {
@@ -48,6 +55,13 @@ class Entregados_infoFragment : Fragment() {
     private var imagesUploaded = 0
     private val MAX_IMAGES_ALLOWED = 1
 
+    /**
+     * Crea y devuelve la vista asociada al fragmento.
+     * @param inflater El objeto inflater que se utilizará para inflar el layout.
+     * @param container El contenedor en el que se debe inflar la vista.
+     * @param savedInstanceState El estado previamente guardado del fragmento.
+     * @return La vista asociada al fragmento.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +69,12 @@ class Entregados_infoFragment : Fragment() {
         val vista = inflater.inflate(R.layout.entregados_fragment_info, container, false)
         return vista
     }
-
+    /**
+     * Se llama inmediatamente después de que onCreateView() ha terminado de ser llamado.
+     * Configura los listeners de los botones y gestiona las acciones correspondientes.
+     * @param view La vista devuelta por onCreateView().
+     * @param savedInstanceState El estado previamente guardado del fragmento.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -114,7 +133,12 @@ class Entregados_infoFragment : Fragment() {
             }
         }
     }
-
+    /**
+     * Realiza una solicitud PUT al servidor con información para cambiar el estado de una guía.
+     * @param url La URL a la que se enviará la solicitud PUT.
+     * @param guiaId El ID de la guía.
+     * @param observaciones Las observaciones relacionadas con el cambio de estado.
+     */
     private fun makePutRequest(url: String, guiaId: Int, observaciones: String) {
         val client = OkHttpClient()
         val cambioEstado = CambioEstadoDTO(
@@ -155,7 +179,10 @@ class Entregados_infoFragment : Fragment() {
             }
         }
     }
-
+    /**
+     * Maneja errores de red, mostrando un diálogo de error al usuario.
+     * @param exception La excepción que se produjo durante la operación de red.
+     */
     private fun handleNetworkError(exception: Exception) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext())
@@ -169,7 +196,10 @@ class Entregados_infoFragment : Fragment() {
             Log.e("NETWORK_ERROR", exception.message, exception)
         }
     }
-
+    /**
+     * Muestra un mensaje en un diálogo de alerta.
+     * @param mensaje El mensaje que se mostrará en el diálogo.
+     */
     private fun showMessage(mensaje: String) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext())
@@ -181,7 +211,9 @@ class Entregados_infoFragment : Fragment() {
                 .show()
         }
     }
-
+    /**
+     * Abre la cámara para capturar una imagen.
+     */
     private fun openCamera() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
@@ -190,7 +222,12 @@ class Entregados_infoFragment : Fragment() {
             e.printStackTrace()
         }
     }
-
+    /**
+     * Gestiona el resultado de la actividad de la cámara.
+     * @param requestCode El código de solicitud.
+     * @param resultCode El código de resultado.
+     * @param data Los datos devueltos por la actividad.
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
@@ -198,7 +235,10 @@ class Entregados_infoFragment : Fragment() {
             saveImageToInternalStorage(imageBitmap)
         }
     }
-
+    /**
+     * Guarda la imagen capturada en el almacenamiento interno del dispositivo.
+     * @param bitmap El mapa de bits de la imagen capturada.
+     */
     private fun saveImageToInternalStorage(bitmap: Bitmap) {
         val wrapper = ContextWrapper(requireContext())
         var file = wrapper.getDir("images", Context.MODE_PRIVATE)
@@ -224,14 +264,20 @@ class Entregados_infoFragment : Fragment() {
             Log.e("ImageSaveError", "Error saving image: ${e.message}")
         }
     }
-
+    /**
+     * Agrega la imagen capturada a la galería del dispositivo.
+     * @param file El archivo de imagen.
+     */
     private fun addToGallery(file: File) {
         val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
         val contentUri = Uri.fromFile(file)
         mediaScanIntent.data = contentUri
         requireContext().sendBroadcast(mediaScanIntent)
     }
-
+    /**
+     * Guarda la imagen y aumenta el contador de imágenes cargadas.
+     * @param bitmap El mapa de bits de la imagen.
+     */
     private fun saveImageAndIncrementCounter(bitmap: Bitmap) {
         // Código para guardar la imagen
 

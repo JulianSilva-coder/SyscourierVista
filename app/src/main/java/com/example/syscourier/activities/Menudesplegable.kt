@@ -16,6 +16,10 @@ import com.example.syscourier.fragments.Entregados
 import com.example.syscourier.fragments.Transporte
 import com.google.android.material.navigation.NavigationView
 
+/**
+ * [Menudesplegable] es una actividad que implementa un menú desplegable de navegación.
+ * Permite al usuario navegar entre diferentes fragmentos de la aplicación y realizar acciones como logout.
+ */
 class Menudesplegable : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var drawerLayout: DrawerLayout
 

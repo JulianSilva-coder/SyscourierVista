@@ -1,32 +1,30 @@
 package com.example.syscourier.activities
 
-import android.os.AsyncTask
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import com.example.syscourier.MiApp
 import com.example.syscourier.R
-import com.example.syscourier.fragments.AsignacionesInfoItemFragment
 import com.example.syscourier.fragments.final_fragment_info
-import okhttp3.OkHttpClient
-import okhttp3.Request
 
-class final_activity_info: AppCompatActivity() {
+/**
+ * [final_activity_info] es una actividad encargada de mostrar información final
+ * sobre una guía específica.
+ * Reemplaza el fragmento [final_fragment_info] en el layout correspondiente
+ * para mostrar los detalles finales de la guía correspondiente al ID proporcionado.
+ */
+class final_activity_info : AppCompatActivity() {
 
     companion object {
-        const val EXTRA_ID_GUIA = ""
+        const val EXTRA_ID_GUIA = "" // ¡Atención! Este valor podría necesitar ser ajustado a un valor específico
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.final_activity_info_item)
 
-        val guiaId = intent.getIntExtra(AsignacionesInfoItemActivity.EXTRA_ID_GUIA, -1)
-        // Crear una lista de objetos de ejemplo
+        val guiaId = intent.getIntExtra(EXTRA_ID_GUIA, -1)
 
-
-
-        // Puedes agregar el fragmento en el contenedor correspondiente
+        // Inicia una transacción de fragmentos para mostrar detalles finales de la guía
         val fragmentTransaction: FragmentTransaction = supportFragmentManager.beginTransaction()
 
         // Crea una instancia del fragmento y establece los argumentos

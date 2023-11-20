@@ -9,7 +9,13 @@ import com.example.syscourier.R
 
 class info_fragment_item : Fragment() {
 
-
+    /**
+     * Crea la vista del fragmento.
+     * @param inflater El objeto LayoutInflater que se utiliza para inflar la vista del fragmento.
+     * @param container El ViewGroup al que se adjuntará la vista del fragmento.
+     * @param savedInstanceState El estado previamente guardado de la actividad.
+     * @return La vista inflada del fragmento.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

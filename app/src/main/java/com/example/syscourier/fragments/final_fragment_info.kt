@@ -26,7 +26,13 @@ class final_fragment_info : Fragment() {
     companion object {
         const val EXTRA_ID_GUIA = "extra_id_guia"
     }
-
+    /**
+     * Crea la vista del fragmento y realiza la solicitud de información sobre la guía de envío.
+     * @param inflater El objeto LayoutInflater que se utiliza para inflar la vista del fragmento.
+     * @param container El ViewGroup al que se adjuntará la vista del fragmento.
+     * @param savedInstanceState El estado previamente guardado de la actividad.
+     * @return La vista inflada del fragmento.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -91,6 +97,12 @@ class final_fragment_info : Fragment() {
 
         return view
     }
+
+    /**
+     * Realiza una solicitud GET para obtener información de una guía de envío.
+     * @param url La URL a la que se realizará la solicitud GET.
+     * @return Un objeto GuiaInfoDTO que contiene la información de la guía de envío.
+     */
     private fun makeGetRequest(url: String): GuiaInfoDTO {
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -107,7 +119,10 @@ class final_fragment_info : Fragment() {
         val gson = Gson()
         return gson.fromJson(responseBody, GuiaInfoDTO::class.java)
     }
-
+    /**
+     * Maneja errores de red mostrando un diálogo de error en la UI principal.
+     * @param exception La excepción que representa el error de red.
+     */
     private fun handleNetworkError(exception: Exception) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext())
@@ -121,7 +136,12 @@ class final_fragment_info : Fragment() {
             Log.e("NETWORK_ERROR", exception.message, exception)
         }
     }
-
+    /**
+     * Realiza una solicitud PUT para actualizar el estado de una guía de envío.
+     * @param url La URL a la que se realizará la solicitud PUT.
+     * @param guiaId El ID de la guía que se actualizará.
+     * @param observaciones Observaciones relacionadas con el cambio de estado.
+     */
     private fun makePutRequest(url: String, guiaId: Int, observaciones: String) {
         val client = OkHttpClient()
         val cambioEstado = CambioEstadoDTO(

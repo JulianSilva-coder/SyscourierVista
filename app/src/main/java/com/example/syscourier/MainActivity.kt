@@ -1,5 +1,10 @@
+/**
+ * Clase principal de la aplicación que gestiona la pantalla de inicio de sesión.
+ * Permite a los usuarios iniciar sesión y acceder al menú desplegable si las credenciales son válidas.
+ *
+ * Autor: Julian Silva
+ */
 package com.example.syscourier
-
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -20,7 +25,16 @@ import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 class MainActivity : Activity() {
-
+    /**
+     * Maneja las acciones a realizar en caso de que la llamada a la API falle.
+     * Muestra un diálogo de alerta con un mensaje específico dependiendo del tipo de error que ocurra.
+     * Además, registra el error en el log del sistema para su seguimiento y depuración.
+     *
+     * @param call La llamada a la API que ha fallado.
+     * @param t El objeto Throwable que representa el tipo de error.
+     *           Puede ser una excepción de tipo ConnectException si no se puede establecer conexión al servidor,
+     *           SocketTimeoutException si se agota el tiempo de espera de conexión, o un error de red en otros casos.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
@@ -56,7 +70,12 @@ class MainActivity : Activity() {
                         ).show()
                     }
                 }
-
+                /**
+                 * Método que maneja las acciones a realizar en caso de fallo en la llamada a la API.
+                 * Muestra un diálogo de alerta con el mensaje específico del tipo de error y registra el error en el log.
+                 * @param call La llamada a la API que ha fallado.
+                 * @param t El objeto Throwable que representa el tipo de error.
+                 */
                 override fun onFailure(call: Call<TokenDTO>, t: Throwable) {
                     runOnUiThread {
                         val errorMessage: String = when (t) {

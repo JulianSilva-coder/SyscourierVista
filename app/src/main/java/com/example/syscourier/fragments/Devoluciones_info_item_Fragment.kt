@@ -1,5 +1,5 @@
-package com.example.syscourier.fragments
 
+package com.example.syscourier.fragments
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
@@ -31,15 +31,26 @@ class Devoluciones_info_item_Fragment : Fragment() {
     companion object {
         const val EXTRA_ID_GUIA = ""
     }
-
+    /**
+     * Crea y devuelve la vista asociada al fragmento.
+     *
+     * @param inflater El inflater utilizado para inflar la vista.
+     * @param container El contenedor para la vista.
+     * @param savedInstanceState Estado previamente guardado, si lo hay.
+     * @return La vista inflada para el fragmento.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val vista = inflater.inflate(R.layout.devoluciones_fragment_info, container, false)
         return vista
-
     }
-
+    /**
+     * Lógica para la creación de la vista del fragmento.
+     *
+     * @param view La vista creada.
+     * @param savedInstanceState Estado previamente guardado, si lo hay.
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -79,7 +90,13 @@ class Devoluciones_info_item_Fragment : Fragment() {
             }
         }
     }
-
+    /**
+     * Realiza una solicitud PUT al servidor para registrar una devolución.
+     *
+     * @param url La URL de la solicitud.
+     * @param guiaId El ID de la guía asociada a la devolución.
+     * @param devoluciones Información sobre la devolución.
+     */
     private fun makePutRequest(url: String, guiaId: Int, devoluciones: String) {
         val client = OkHttpClient()
         val cambioEstado = CambioEstadoDTO(
@@ -120,7 +137,11 @@ class Devoluciones_info_item_Fragment : Fragment() {
             }
         }
     }
-
+    /**
+     * Maneja errores de red, mostrando un diálogo al usuario.
+     *
+     * @param exception La excepción ocurrida.
+     */
     private fun handleNetworkError(exception: Exception) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext())
@@ -134,7 +155,11 @@ class Devoluciones_info_item_Fragment : Fragment() {
             Log.e("NETWORK_ERROR", exception.message, exception)
         }
     }
-
+    /**
+     * Muestra un mensaje de alerta al usuario.
+     *
+     * @param mensaje El mensaje a mostrar.
+     */
     private fun showMessage(mensaje: String) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext()).setTitle("Informacion").setMessage(mensaje)

@@ -4,10 +4,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.syscourier.fragments.Entregados_infoFragment
 import com.example.syscourier.R
-class Entregados_infoActivity : AppCompatActivity()  {
+
+/**
+ * [Entregados_infoActivity] es una actividad que muestra información detallada
+ * sobre un elemento entregado específico.
+ * Reemplaza el fragmento [Entregados_infoFragment] en el layout correspondiente
+ * para mostrar los detalles del elemento entregado correspondiente al ID proporcionado.
+ */
+class Entregados_infoActivity : AppCompatActivity() {
 
     companion object {
-        const val EXTRA_ID_GUIA = ""
+        const val EXTRA_ID_GUIA = "" // ¡Atención! Este valor podría necesitar ser ajustado a un valor específico
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -16,6 +23,7 @@ class Entregados_infoActivity : AppCompatActivity()  {
 
         val guiaId = intent.getIntExtra(EXTRA_ID_GUIA, -1)
 
+        // Inicia una transacción de fragmentos para mostrar detalles del elemento entregado
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         val fragment = Entregados_infoFragment()
         val args = Bundle()

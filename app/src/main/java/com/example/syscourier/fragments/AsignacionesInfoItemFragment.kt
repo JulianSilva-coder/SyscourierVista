@@ -1,3 +1,11 @@
+/**
+ * Fragmento encargado de mostrar información detallada de una asignación específica.
+ * Permite visualizar información detallada y realizar acciones como cambiar el estado de la asignación.
+ * Utiliza un diseño de fragmento con elementos de interfaz de usuario para mostrar los detalles de la asignación.
+ *
+ * @author Julian Silva
+ */
+
 package com.example.syscourier.fragments
 
 import android.content.Intent
@@ -32,7 +40,16 @@ class AsignacionesInfoItemFragment : Fragment() {
     companion object {
         const val EXTRA_ID_GUIA = "extra_id_guia"
     }
-
+    /**
+     * Función llamada para crear y devolver la vista asociada con el fragmento.
+     * Infla el diseño del fragmento y muestra los detalles de la asignación.
+     *
+     * @param inflater El objeto LayoutInflater que se utiliza para inflar cualquier vista en el fragmento.
+     * @param container Si no es nulo, este es el padre al que se adjuntará la vista resultante.
+     * @param savedInstanceState Si no es nulo, este fragmento está siendo reconstruido a partir de un estado guardado anteriormente.
+     *
+     * @return La vista raíz del fragmento.
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -111,7 +128,13 @@ class AsignacionesInfoItemFragment : Fragment() {
 
         return view
     }
-
+    /**
+     * Realiza una solicitud GET para obtener información detallada de la asignación desde el servidor.
+     *
+     * @param url La URL del servidor desde donde se obtendrán los detalles de la asignación.
+     *
+     * @return El objeto GuiaInfoDTO que contiene los detalles de la asignación.
+     */
     private fun makeGetRequest(url: String): GuiaInfoDTO {
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -128,7 +151,12 @@ class AsignacionesInfoItemFragment : Fragment() {
         val gson = Gson()
         return gson.fromJson(responseBody, GuiaInfoDTO::class.java)
     }
-
+    /**
+     * Maneja los errores de red mostrando un mensaje de alerta al usuario.
+     *
+     * @param exception La excepción que representa el error de red.
+     * @author Nicolas Peña
+     */
     private fun handleNetworkError(exception: Exception) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext())
@@ -142,7 +170,14 @@ class AsignacionesInfoItemFragment : Fragment() {
             Log.e("NETWORK_ERROR", exception.message, exception)
         }
     }
-
+    /**
+     * Realiza una solicitud PUT para cambiar el estado de la asignación en el servidor.
+     *
+     * @param url La URL del servidor donde se realizará la solicitud de cambio de estado.
+     * @param guiaId El ID de la asignación para cambiar su estado.
+     *
+     * @author Nicolas Peña
+     */
     private fun makePutRequest(url: String, guiaId: Int) {
         val client = OkHttpClient()
         val cambioEstado = CambioEstadoDTO(

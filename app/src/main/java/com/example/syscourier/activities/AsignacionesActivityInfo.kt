@@ -9,6 +9,10 @@ import com.example.syscourier.R
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
+/**
+ * [AsignacionesActivityInfo] es una actividad que realiza una solicitud GET a una URL específica
+ * y muestra la respuesta en un Toast en la interfaz de usuario.
+ */
 class AsignacionesActivityInfo : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +34,11 @@ class AsignacionesActivityInfo : AppCompatActivity() {
         }
     }
 
+    /**
+     * Realiza una solicitud GET a la URL proporcionada.
+     * @param url La URL a la que se realiza la solicitud GET.
+     * @return El cuerpo de la respuesta como una cadena de texto, o "Error en la solicitud" si hay un problema.
+     */
     private fun makeGetRequest(url: String): String {
         val client = OkHttpClient()
         val request = Request.Builder()

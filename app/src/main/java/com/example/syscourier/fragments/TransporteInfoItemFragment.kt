@@ -145,7 +145,7 @@ class TransporteInfoItemFragment : Fragment(){
      */
     private fun makePutRequest(url: String, guiaId: Int) {
         val client = OkHttpClient()
-        val cambioEstado = CambioEstadoDTO(guiaId = guiaId, codEstado = 8, motivo = "En transporte", observaciones = "En transporte")
+        val cambioEstado = CambioEstadoDTO(guiaId = guiaId, codEstado = 6, motivo = "En entrega", observaciones = "En entrega")
         val gson = Gson()
         val cambioEstadoJson = gson.toJson(cambioEstado)
         val requestBody = RequestBody.create("application/json; charset=utf-8".toMediaType(), cambioEstadoJson)

@@ -56,7 +56,7 @@ class Devoluciones_info_item_Fragment : Fragment() {
 
         val spinner: Spinner = view.findViewById(R.id.spinner)
         view.findViewById<Button>(R.id.Boton_devolucion).setOnClickListener {
-            var campoTextoDevolucion: TextView = view.findViewById(R.id.edit_text_area)
+            var campoTextoDevolucion: TextView = view.findViewById(R.id.edit_text_area1)
             val campovacioD = campoTextoDevolucion.text.isEmpty()
             val selectedItem = spinner.selectedItem.toString()
 

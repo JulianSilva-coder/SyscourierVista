@@ -15,9 +15,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.syscourier.API.ApiClient
-import com.example.syscourier.API.ApiService
+import ApiService
 import com.example.syscourier.activities.Menudesplegable
 import com.example.syscourier.dto.TokenDTO
+import com.example.syscourier.dto.UsuarioDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,9 +47,9 @@ class MainActivity : Activity() {
 
             val usuario = usuarioEditText.text.toString()
             val contrasena = contrasenaEditText.text.toString()
-
-            val service = ApiClient.retrofit.create(ApiService::class.java)
-            val call = service.obtenerDatos(usuario, contrasena)
+            val credenciales = UsuarioDTO(usuario, contrasena)
+            val service = ApiClient.retrofit.create(ApiService.ApiService::class.java)
+            val call = service.obtenerDatos(credenciales)
 
             call.enqueue(object : Callback<TokenDTO> {
                 override fun onResponse(call: Call<TokenDTO>, response: Response<TokenDTO>) {
@@ -61,11 +62,12 @@ class MainActivity : Activity() {
                         val intent = Intent(this@MainActivity, Menudesplegable::class.java)
                         startActivity(intent)
                     } else {
+
                         usuarioEditText.text = ""
                         contrasenaEditText.text = ""
                         Toast.makeText(
                             this@MainActivity,
-                            "Error de inicio de sesión, credenciales inválidas",
+                            "Error de inicio de sesión, credenciales inválidas" + response.code(),
                             Toast.LENGTH_SHORT
                         ).show()
                     }

@@ -4,11 +4,12 @@
     android:layout_height="196dp"
 
     android:padding="16dp"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:background="@color/gray">
 
     <ImageView
-        android:layout_width="176dp"
-        android:layout_height="144dp"
+        android:layout_width="145dp"
+        android:layout_height="116dp"
         android:layout_gravity="center"
         android:src="@drawable/logo" />
 </FrameLayout>

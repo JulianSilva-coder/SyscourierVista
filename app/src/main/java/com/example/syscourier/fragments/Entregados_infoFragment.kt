@@ -1,5 +1,6 @@
-
 package com.example.syscourier.fragments
+
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
@@ -15,7 +16,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -29,22 +29,24 @@ import com.example.syscourier.activities.Menudesplegable
 import com.example.syscourier.dto.CambioEstadoDTO
 import com.example.syscourier.dto.ErrorDTO
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.apache.commons.net.ftp.FTP
+import org.apache.commons.net.ftp.FTPClient
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
+import java.io.InputStream
 import java.io.OutputStream
-/**
- * Fragmento que muestra información relacionada con entregas.
- * Permite capturar imágenes, registrar observaciones y realizar cambios de estado en la aplicación.
- * @property EXTRA_ID_GUIA Identificador extra para la guía.
- * @property CAMERA_REQUEST_CODE Código de solicitud para la cámara.
- * @property imagesUploaded Contador de imágenes cargadas.
- * @property MAX_IMAGES_ALLOWED Número máximo de imágenes permitidas.
- */
+import java.util.concurrent.TimeUnit
+
 class Entregados_infoFragment : Fragment() {
 
     companion object {
@@ -55,13 +57,8 @@ class Entregados_infoFragment : Fragment() {
     private var imagesUploaded = 0
     private val MAX_IMAGES_ALLOWED = 1
 
-    /**
-     * Crea y devuelve la vista asociada al fragmento.
-     * @param inflater El objeto inflater que se utilizará para inflar el layout.
-     * @param container El contenedor en el que se debe inflar la vista.
-     * @param savedInstanceState El estado previamente guardado del fragmento.
-     * @return La vista asociada al fragmento.
-     */
+    private lateinit var file_to_upload: File
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,26 +66,21 @@ class Entregados_infoFragment : Fragment() {
         val vista = inflater.inflate(R.layout.entregados_fragment_info, container, false)
         return vista
     }
-    /**
-     * Se llama inmediatamente después de que onCreateView() ha terminado de ser llamado.
-     * Configura los listeners de los botones y gestiona las acciones correspondientes.
-     * @param view La vista devuelta por onCreateView().
-     * @param savedInstanceState El estado previamente guardado del fragmento.
-     */
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<ImageButton>(R.id.foto_camera).setOnClickListener {
             if (ContextCompat.checkSelfPermission(
                     requireContext(),
-                    android.Manifest.permission.CAMERA
+                    Manifest.permission.CAMERA
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
                 openCamera()
             } else {
                 ActivityCompat.requestPermissions(
                     requireActivity(),
-                    arrayOf(android.Manifest.permission.CAMERA),
+                    arrayOf(Manifest.permission.CAMERA),
                     CAMERA_REQUEST_CODE
                 )
             }
@@ -97,13 +89,10 @@ class Entregados_infoFragment : Fragment() {
         view.findViewById<Button>(R.id.button_entrega).setOnClickListener {
             var campoTextoObservacion: TextView = view.findViewById(R.id.edit_text_area)
 
-            // Verificar si el campo de texto está vacío
             val campoTextoVacio = campoTextoObservacion.text.isEmpty()
 
-            // Verificar si no se ha subido ninguna imagen
             val ningunaImagenSubida = imagesUploaded == 0
 
-            // Mostrar mensaje si alguna de las condiciones se cumple
             if (campoTextoVacio || ningunaImagenSubida) {
                 var mensaje = ""
                 if (campoTextoVacio && ningunaImagenSubida) {
@@ -133,87 +122,82 @@ class Entregados_infoFragment : Fragment() {
             }
         }
     }
-    /**
-     * Realiza una solicitud PUT al servidor con información para cambiar el estado de una guía.
-     * @param url La URL a la que se enviará la solicitud PUT.
-     * @param guiaId El ID de la guía.
-     * @param observaciones Las observaciones relacionadas con el cambio de estado.
-     */
     private fun makePutRequest(url: String, guiaId: Int, observaciones: String) {
-        val client = OkHttpClient()
-        val cambioEstado = CambioEstadoDTO(
-            guiaId = guiaId,
-            codEstado = 6,
-            motivo = "Entregado",
-            observaciones = observaciones
-        )
-        val gson = Gson()
-        Log.d("ID: ", guiaId.toString())
-        val cambioEstadoJson = gson.toJson(cambioEstado)
-        val requestBody =
-            cambioEstadoJson.toRequestBody("application/json; charset=utf-8".toMediaType())
-        val request = Request.Builder()
-            .addHeader(
-                "Authorization", MiApp.accessToken
+        try {
+            val client = OkHttpClient.Builder()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .build()
+
+            val cambioEstado = CambioEstadoDTO(
+                guiaId = guiaId,
+                codEstado = 6,
+                motivo = "Entregado",
+                observaciones = observaciones
             )
-            .url(url)
-            .put(requestBody)
-            .build()
 
-        val response = client.newCall(request).execute()
-        Log.d("CODIGO!!!", response.code.toString())
-
-        if (response.code == 202) {
-            // Código para el caso 202
-        } else {
-            val responseBody =
-                response.body?.string() ?: throw RuntimeException("Error en la solicitud")
-            // Usa Gson u otra biblioteca para convertir la cadena JSON a una lista de objetos GuiaIntro
             val gson = Gson()
-            val mensaje =
-                gson.fromJson(responseBody, ErrorDTO::class.java)?.message ?: "Mensaje nulo o vacío"
+            Log.d("ID: ", guiaId.toString())
+            val cambioEstadoJson = gson.toJson(cambioEstado)
+            val requestBody =
+                cambioEstadoJson.toRequestBody("application/json; charset=utf-8".toMediaType())
 
-            // Mostrar el Toast en el hilo principal
+            val request = Request.Builder()
+                .addHeader("Authorization", MiApp.accessToken)
+                .url(url)
+                .put(requestBody)
+                .build()
+
+            val response = client.newCall(request).execute()
+            Log.d("CODIGO!!!", response.code.toString())
+
+            if (response.code == 202) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    uploadFileToFTP(file_to_upload)
+                }
+            } else {
+                val responseBody =
+                    response.body?.string() ?: throw RuntimeException("Error en la solicitud")
+                val gson = Gson()
+                val mensaje =
+                    gson.fromJson(responseBody, ErrorDTO::class.java)?.message ?: "Mensaje nulo o vacío"
+
+                requireActivity().runOnUiThread {
+                    Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show()
+                }
+            }
+        } catch (e: Exception) {
+            Log.e("Error", "Error en la solicitud: ${e.message}")
             requireActivity().runOnUiThread {
-                Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error en la solicitud", Toast.LENGTH_SHORT).show()
             }
         }
     }
-    /**
-     * Maneja errores de red, mostrando un diálogo de error al usuario.
-     * @param exception La excepción que se produjo durante la operación de red.
-     */
     private fun handleNetworkError(exception: Exception) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext())
                 .setTitle("Error de conexión")
                 .setMessage("Tiempo de espera agotado. Verifica tu conexión a Internet.")
                 .setPositiveButton("Aceptar") { _, _ ->
-                    // Acciones adicionales si es necesario
                 }
                 .show()
 
             Log.e("NETWORK_ERROR", exception.message, exception)
         }
     }
-    /**
-     * Muestra un mensaje en un diálogo de alerta.
-     * @param mensaje El mensaje que se mostrará en el diálogo.
-     */
+
     private fun showMessage(mensaje: String) {
         requireActivity().runOnUiThread {
             AlertDialog.Builder(requireContext())
                 .setTitle("Informacion")
                 .setMessage(mensaje)
                 .setPositiveButton("Aceptar") { _, _ ->
-                    // Acciones adicionales si es necesario
                 }
                 .show()
         }
     }
-    /**
-     * Abre la cámara para capturar una imagen.
-     */
+
     private fun openCamera() {
         val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         try {
@@ -222,12 +206,7 @@ class Entregados_infoFragment : Fragment() {
             e.printStackTrace()
         }
     }
-    /**
-     * Gestiona el resultado de la actividad de la cámara.
-     * @param requestCode El código de solicitud.
-     * @param resultCode El código de resultado.
-     * @param data Los datos devueltos por la actividad.
-     */
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
@@ -235,53 +214,80 @@ class Entregados_infoFragment : Fragment() {
             saveImageToInternalStorage(imageBitmap)
         }
     }
-    /**
-     * Guarda la imagen capturada en el almacenamiento interno del dispositivo.
-     * @param bitmap El mapa de bits de la imagen capturada.
-     */
+
     private fun saveImageToInternalStorage(bitmap: Bitmap) {
         val wrapper = ContextWrapper(requireContext())
-        var file = wrapper.getDir("images", Context.MODE_PRIVATE)
-        file = File(file, "${System.currentTimeMillis()}.jpg")
+        var dir = wrapper.getDir("images", Context.MODE_PRIVATE)
+        file_to_upload = File(dir, "${System.currentTimeMillis()}.jpg")
 
         try {
-            val stream: OutputStream = FileOutputStream(file)
+            val stream: OutputStream = FileOutputStream(file_to_upload)
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
             stream.flush()
             stream.close()
 
-            // Agregar la imagen a la galería
-            addToGallery(file)
+            addToGallery(file_to_upload)
 
-            Log.d("ImageSaved", "Image saved successfully: ${file.absolutePath}")
+            Log.d("ImageSaved", "Image saved successfully: ${file_to_upload.absolutePath}")
 
-            view?.findViewById<TextView>(R.id.info_imagencargada)?.text = file.name
+            view?.findViewById<TextView>(R.id.info_imagencargada)?.text = file_to_upload.name
 
-            // Incrementar el contador de imágenes después de guardar la imagen
             saveImageAndIncrementCounter(bitmap)
+
         } catch (e: IOException) {
             e.printStackTrace()
             Log.e("ImageSaveError", "Error saving image: ${e.message}")
         }
     }
-    /**
-     * Agrega la imagen capturada a la galería del dispositivo.
-     * @param file El archivo de imagen.
-     */
+
     private fun addToGallery(file: File) {
         val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
         val contentUri = Uri.fromFile(file)
         mediaScanIntent.data = contentUri
         requireContext().sendBroadcast(mediaScanIntent)
     }
-    /**
-     * Guarda la imagen y aumenta el contador de imágenes cargadas.
-     * @param bitmap El mapa de bits de la imagen.
-     */
-    private fun saveImageAndIncrementCounter(bitmap: Bitmap) {
-        // Código para guardar la imagen
 
-        // Incrementar el contador de imágenes
+    private fun saveImageAndIncrementCounter(bitmap: Bitmap) {
         imagesUploaded++
+    }
+
+    private suspend fun uploadFileToFTP(file: File) {
+        withContext(Dispatchers.IO) {
+            val server = MiApp.HOST_NAME
+            val port = 21
+            val user = "syscourierftp"
+            val password = "Syscourier2023."
+
+            val ftpClient = FTPClient()
+            ftpClient.connectTimeout = 10000
+
+            try {
+                ftpClient.connect(server, port)
+                ftpClient.login(user, password)
+                ftpClient.enterLocalPassiveMode()
+                ftpClient.setFileType(FTP.BINARY_FILE_TYPE)
+
+                val inputStream: InputStream = FileInputStream(file)
+
+                val remoteFile = "/home/syscourierftp/${file.name}"
+                val storeSuccess = ftpClient.storeFile(remoteFile, inputStream)
+                inputStream.close()
+
+                if (storeSuccess) {
+                    Log.d("FTP", "File uploaded successfully to $remoteFile")
+                } else {
+                    Log.d("FTP", "Failed to upload file")
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                Log.e("FTP", "Error uploading file: ${e.message}")
+            } finally {
+                try {
+                    ftpClient.disconnect()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+        }
     }
 }

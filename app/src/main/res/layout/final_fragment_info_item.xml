@@ -31,7 +31,7 @@
             android:layout_weight="1"
             android:text="ID"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:fontFamily="sans-serif-black" />
 
         <TextView
             android:id="@+id/final_info_idValueTextView"
@@ -56,7 +56,7 @@
             android:layout_weight="1"
             android:text="Producto"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:fontFamily="sans-serif-black" />
 
         <TextView
             android:id="@+id/final_info_productoValueTextView"
@@ -83,7 +83,7 @@
         android:layout_marginTop="11dp"
         android:text="Remitente"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:fontFamily="sans-serif-black" />
 
     <View
         android:id="@+id/final_info_divider1Remitente"
@@ -204,7 +204,7 @@
         android:layout_marginTop="7dp"
         android:text="Destinatario"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:fontFamily="sans-serif-black" />
 
     <View
         android:id="@+id/final_info_divider2Remitente"
@@ -326,7 +326,7 @@
         android:layout_marginTop="4dp"
         android:text="Total"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:fontFamily="sans-serif-black" />
     <View
         android:id="@+id/final_info_divider3Remitente"
         android:layout_width="match_parent"

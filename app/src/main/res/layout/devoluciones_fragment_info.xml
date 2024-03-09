@@ -17,20 +17,20 @@
         android:gravity="center"
         android:text="Motivo de devolución"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:fontFamily="sans-serif-black" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="66dp"
+        android:layout_height="48dp"
         android:background="@color/red"
         android:text="Devolución"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:fontFamily="sans-serif-black"/>
 
     <EditText
-        android:id="@+id/edit_text_area"
+        android:id="@+id/edit_text_area1"
         android:layout_width="wrap_content"
         android:layout_height="172dp"
         android:layout_below="@+id/textView5"
@@ -46,16 +46,18 @@
         android:maxLines="10"
         android:minLines="6"
         android:padding="10dp"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"
+        android:fontFamily="sans-serif-black"/>
 
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_text_area"
+        android:layout_below="@id/edit_text_area1"
         android:layout_marginTop="16dp"
-        android:entries="@array/opciones_array" />
+        android:entries="@array/opciones_array"
+        android:fontFamily="sans-serif-black"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -63,8 +65,9 @@
         android:layout_width="410dp"
         android:layout_height="106dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="-1dp"
         android:background="@color/red"
+        android:fontFamily="sans-serif-black"
         android:text="Devolucion"
         android:textAlignment="center"
         android:textColor="@color/white"

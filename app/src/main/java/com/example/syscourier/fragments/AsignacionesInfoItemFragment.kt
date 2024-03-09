@@ -22,9 +22,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.syscourier.MiApp
 import com.example.syscourier.R
-import com.example.syscourier.activities.AsignacionesInfoItemActivity
 import com.example.syscourier.activities.Menudesplegable
-import com.example.syscourier.activities.Transito_info_activity
 import com.example.syscourier.dto.CambioEstadoDTO
 import com.example.syscourier.dto.ErrorDTO
 import com.example.syscourier.dto.GuiaInfoDTO
@@ -32,7 +30,6 @@ import com.google.gson.Gson
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
 class AsignacionesInfoItemFragment : Fragment() {
@@ -153,7 +150,6 @@ class AsignacionesInfoItemFragment : Fragment() {
     }
     /**
      * Maneja los errores de red mostrando un mensaje de alerta al usuario.
-     *
      * @param exception La excepción que representa el error de red.
      * @author Nicolas Peña
      */
@@ -166,7 +162,6 @@ class AsignacionesInfoItemFragment : Fragment() {
                     // Acciones adicionales si es necesario
                 }
                 .show()
-
             Log.e("NETWORK_ERROR", exception.message, exception)
         }
     }
@@ -182,9 +177,9 @@ class AsignacionesInfoItemFragment : Fragment() {
         val client = OkHttpClient()
         val cambioEstado = CambioEstadoDTO(
             guiaId = guiaId,
-            codEstado = 8,
-            motivo = "En transporte",
-            observaciones = "En transporte"
+            codEstado = 1,
+            motivo = "En asignaciones",
+            observaciones = "En asignaciones"
         )
         val gson = Gson()
         val cambioEstadoJson = gson.toJson(cambioEstado)

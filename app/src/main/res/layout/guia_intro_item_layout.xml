@@ -50,6 +50,7 @@
         android:id="@+id/actionButton"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:textSize="13dp"
         android:text="INFO"
         android:background="@drawable/rounded_boton"/>
 </LinearLayout>

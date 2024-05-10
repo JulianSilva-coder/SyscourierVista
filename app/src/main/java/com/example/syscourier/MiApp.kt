@@ -6,7 +6,7 @@ package com.example.syscourier
 class MiApp {
     companion object {
         var accessToken: String = ""
-        var HOST_NAME =  "54.224.39.170"
+        var HOST_NAME =  "18.208.231.128"
         var BASE_URL: String = "http://${HOST_NAME}/"
     }
 }

@@ -42,16 +42,6 @@ class final_fragment_info : Fragment() {
         // Obtener los elementos de la interfaz de usuario por sus identificadores
         val final_idValueTextView: TextView =
             view.findViewById(R.id.final_info_idValueTextView)
-        val final_productoValueTextView: TextView =
-            view.findViewById(R.id.final_info_productoValueTextView)
-        val final_remitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.final_info_remitenteInfoValueTextView)
-        val final_nombreRemitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.final_info_nombreRemitenteInfoValueTextView)
-        val final_direccionRemitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.final_info_direccionRemitenteInfoValueTextView)
-        val final_telefonoRemitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.final_info_telefonoRemitenteInfoValueTextView)
         val final_identificacionDestinatarioInfoValueTextView: TextView =
             view.findViewById(R.id.final_info_identificacionDestinatarioInfoValueTextView)
         val final_nombreDestinatarioInfoValueTextView: TextView =
@@ -60,8 +50,6 @@ class final_fragment_info : Fragment() {
             view.findViewById(R.id.final_info_direccionDestinatarioInfoValueTextView)
         val final_telefonoDestinatarioInfoValueTextView: TextView =
             view.findViewById(R.id.final_info_telefonoDestinatarioInfoValueTextView)
-        val final_totalInfoValueTextView: TextView =
-            view.findViewById(R.id.final_info_totalInfoValueTextView)
 
 
         // Obtener el guiaId de los argumentos
@@ -73,12 +61,6 @@ class final_fragment_info : Fragment() {
                 Log.d("Resultado", result.toString())
                 activity?.runOnUiThread {
                     final_idValueTextView.text = result.id.toString()
-                    final_productoValueTextView.text = result.producto
-                    final_remitenteInfoValueTextView.text = result.remitenteIdentificacion
-                    final_nombreRemitenteInfoValueTextView.text = result.remitenteNombre
-                    final_direccionRemitenteInfoValueTextView.text =
-                        result.remitenteDireccion
-                    final_telefonoRemitenteInfoValueTextView.text = result.remitenteTelefono
                     final_identificacionDestinatarioInfoValueTextView.text =
                         result.destinatarioIdentificacion
                     final_nombreDestinatarioInfoValueTextView.text =
@@ -87,8 +69,6 @@ class final_fragment_info : Fragment() {
                         result.destinatarioDireccion
                     final_telefonoDestinatarioInfoValueTextView.text =
                         result.destinatarioTelefono
-                    final_totalInfoValueTextView.text = result.totalFlete.toString()
-
                 }
             } catch (e: Exception) {
                 handleNetworkError(e)

@@ -56,16 +56,6 @@ class AsignacionesInfoItemFragment : Fragment() {
         // Obtener los elementos de la interfaz de usuario por sus identificadores
         val asignaciones_idValueTextView: TextView =
             view.findViewById(R.id.asignaciones_idValueTextView)
-        val asignaciones_productoValueTextView: TextView =
-            view.findViewById(R.id.asignaciones_productoValueTextView)
-        val asignaciones_remitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.asignaciones_remitenteInfoValueTextView)
-        val asignaciones_nombreRemitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.asignaciones_nombreRemitenteInfoValueTextView)
-        val asignaciones_direccionRemitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.asignaciones_direccionRemitenteInfoValueTextView)
-        val asignaciones_telefonoRemitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.asignaciones_telefonoRemitenteInfoValueTextView)
         val asignaciones_identificacionDestinatarioInfoValueTextView: TextView =
             view.findViewById(R.id.asignaciones_identificacionDestinatarioInfoValueTextView)
         val asignaciones_nombreDestinatarioInfoValueTextView: TextView =
@@ -74,8 +64,6 @@ class AsignacionesInfoItemFragment : Fragment() {
             view.findViewById(R.id.asignaciones_direccionDestinatarioInfoValueTextView)
         val asignaciones_telefonoDestinatarioInfoValueTextView: TextView =
             view.findViewById(R.id.asignaciones_telefonoDestinatarioInfoValueTextView)
-        val asignaciones_totalInfoValueTextView: TextView =
-            view.findViewById(R.id.asignaciones_totalInfoValueTextView)
         val asignaciones_info_button: Button = view.findViewById(R.id.asignaciones_info_button)
 
 
@@ -88,12 +76,6 @@ class AsignacionesInfoItemFragment : Fragment() {
                 Log.d("Resultado", result.toString())
                 activity?.runOnUiThread {
                     asignaciones_idValueTextView.text = result.id.toString()
-                    asignaciones_productoValueTextView.text = result.producto
-                    asignaciones_remitenteInfoValueTextView.text = result.remitenteIdentificacion
-                    asignaciones_nombreRemitenteInfoValueTextView.text = result.remitenteNombre
-                    asignaciones_direccionRemitenteInfoValueTextView.text =
-                        result.remitenteDireccion
-                    asignaciones_telefonoRemitenteInfoValueTextView.text = result.remitenteTelefono
                     asignaciones_identificacionDestinatarioInfoValueTextView.text =
                         result.destinatarioIdentificacion
                     asignaciones_nombreDestinatarioInfoValueTextView.text =
@@ -102,8 +84,7 @@ class AsignacionesInfoItemFragment : Fragment() {
                         result.destinatarioDireccion
                     asignaciones_telefonoDestinatarioInfoValueTextView.text =
                         result.destinatarioTelefono
-                    asignaciones_totalInfoValueTextView.text = result.totalFlete.toString()
-
+                    
 
                     asignaciones_info_button.setOnClickListener {
                         AsyncTask.execute {

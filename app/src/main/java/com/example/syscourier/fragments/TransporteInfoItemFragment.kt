@@ -46,16 +46,6 @@ class TransporteInfoItemFragment : Fragment(){
         // Obtener los elementos de la interfaz de usuario por sus identificadores
         val transporte_idValueTextView: TextView =
             view.findViewById(R.id.transporte_idValueTextView)
-        val transporte_productoValueTextView: TextView =
-            view.findViewById(R.id.transporte_productoValueTextView)
-        val transporte_remitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.transporte_remitenteInfoValueTextView)
-        val transporte_nombreRemitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.transporte_nombreRemitenteInfoValueTextView)
-        val transporte_direccionRemitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.transporte_direccionRemitenteInfoValueTextView)
-        val transporte_telefonoRemitenteInfoValueTextView: TextView =
-            view.findViewById(R.id.transporte_telefonoRemitenteInfoValueTextView)
         val transporte_identificacionDestinatarioInfoValueTextView: TextView =
             view.findViewById(R.id.transporte_identificacionDestinatarioInfoValueTextView)
         val transporte_nombreDestinatarioInfoValueTextView: TextView =
@@ -64,8 +54,6 @@ class TransporteInfoItemFragment : Fragment(){
             view.findViewById(R.id.transporte_direccionDestinatarioInfoValueTextView)
         val transporte_telefonoDestinatarioInfoValueTextView: TextView =
             view.findViewById(R.id.transporte_telefonoDestinatarioInfoValueTextView)
-        val transporte_totalInfoValueTextView: TextView =
-            view.findViewById(R.id.transporte_totalInfoValueTextView)
         val transporte_Entregar_button: Button = view.findViewById(R.id.transporte_Entregar)
         val transporte_devolucion_button: Button = view.findViewById(R.id.transporte_devolucion)
 
@@ -79,12 +67,6 @@ class TransporteInfoItemFragment : Fragment(){
                 Log.d("Resultado", result.toString())
                 activity?.runOnUiThread {
                     transporte_idValueTextView.text = result.id.toString()
-                    transporte_productoValueTextView.text = result.producto
-                    transporte_remitenteInfoValueTextView.text = result.remitenteIdentificacion
-                    transporte_nombreRemitenteInfoValueTextView.text = result.remitenteNombre
-                    transporte_direccionRemitenteInfoValueTextView.text =
-                        result.remitenteDireccion
-                    transporte_telefonoRemitenteInfoValueTextView.text = result.remitenteTelefono
                     transporte_identificacionDestinatarioInfoValueTextView.text =
                         result.destinatarioIdentificacion
                     transporte_nombreDestinatarioInfoValueTextView.text =
@@ -93,7 +75,6 @@ class TransporteInfoItemFragment : Fragment(){
                         result.destinatarioDireccion
                     transporte_telefonoDestinatarioInfoValueTextView.text =
                         result.destinatarioTelefono
-                    transporte_totalInfoValueTextView.text = result.totalFlete.toString()
 
 
                     transporte_Entregar_button.setOnClickListener {
